@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace YBlast
@@ -17,6 +18,9 @@ namespace YBlast
         {
             _gridData.SetGridSize(_gridSize);
 
+            List<ECubeColor> _colorEnums = new List<ECubeColor>(
+                (ECubeColor[])System.Enum.GetValues(typeof(ECubeColor)));
+
             Vector2Int gridIndex = new Vector2Int();
             
             for (gridIndex.x = 0; gridIndex.x < _gridSize.x; gridIndex.x++)
@@ -29,9 +33,7 @@ namespace YBlast
 
             ECubeColor GetRandomCubeColor()
             {
-                System.Array colors = System.Enum.GetValues(typeof(ECubeColor));
-                int randomIndex = Random.Range(1, colors.Length);
-                return (ECubeColor)colors.GetValue(randomIndex);
+                return _colorEnums[Random.Range(1, _colorEnums.Count)];
             }
             
             UnityEditor.EditorUtility.SetDirty(this);
