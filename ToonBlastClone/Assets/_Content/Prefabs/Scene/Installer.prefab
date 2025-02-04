@@ -78,6 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gridCreationDataSo: {fileID: 11400000, guid: 9750bfaf439d0d149957226379dbb342, type: 2}
+  _spacingSettingsSO: {fileID: 11400000, guid: 277af0b1d1f184f4f828895473121baf, type: 2}
 --- !u!1 &5778761997136155112
 GameObject:
   m_ObjectHideFlags: 0
