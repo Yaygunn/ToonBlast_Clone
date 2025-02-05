@@ -27,6 +27,8 @@ namespace YBlast.Managers
         public void PlaceCube(BaseCube cube, Vector2Int cellIndex)
         {
             _grid.Cubes[cellIndex.x, cellIndex.y] = cube;
+            cube.SetCellIndex(cellIndex);
+            
             if (cube.Type == ECubeType.ColorCube)
                 _grid.CubeColors[cellIndex.x, cellIndex.y] = ((ColorCube)cube).CubeColor;
         }
