@@ -13,5 +13,10 @@ namespace YBlast
         public ECubeColor CubeColor => _color;
 
         #endregion
+
+        public void SetColor(ECubeColor cubeColor)
+        {
+            _color = cubeColor;
+        }
     }
 }

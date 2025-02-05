@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace YBlast
+namespace YBlast.Data
 {
     
     [Serializable]

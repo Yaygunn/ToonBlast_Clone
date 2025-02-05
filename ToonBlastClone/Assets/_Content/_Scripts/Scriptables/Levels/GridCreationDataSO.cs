@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using YBlast.Data;
 using UnityEngine;
 
 namespace YBlast
