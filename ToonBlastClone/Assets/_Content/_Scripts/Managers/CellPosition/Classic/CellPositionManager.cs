@@ -1,6 +1,7 @@
 using UnityEngine;
 using YBlast.Scriptables;
 using YBlast.Utilities;
+using YBlast.Data;
 using Zenject;
 
 namespace YBlast.Managers.CellPosition.Classic
@@ -38,8 +39,8 @@ namespace YBlast.Managers.CellPosition.Classic
             float totalHeight = gridSize.x * cellSize + (gridSize.x - 1) * cellSpacing;
             float totalWidth = gridSize.y * cellSize + (gridSize.y - 1) * cellSpacing;
 
-            _cell00Pos.x = _centerPos.y + totalWidth / 2 - cellSize / 2;
-            _centerPos.y = _centerPos.x - totalHeight / 2 + cellSize / 2;
+            _cell00Pos.x = _centerPos.x - (totalWidth * 0.5f) + (cellSize * 0.5f);
+            _cell00Pos.y = _centerPos.y + (totalHeight*0.5f) - (cellSize * 0.5f);
         }
 
         private void SetCubeSpawnPositions(GridCreationData gridCreationData, float spawnYOffset)
