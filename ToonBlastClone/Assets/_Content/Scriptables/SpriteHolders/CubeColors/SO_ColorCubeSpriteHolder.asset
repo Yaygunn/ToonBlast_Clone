@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf44c2696de6314aaf519cfad67e2fe, type: 3}
+  m_Name: SO_ColorCubeSpriteHolder
+  m_EditorClassIdentifier: 
+  _blue:
+    Default: {fileID: 21300000, guid: 2044862e9ef83914dbeda5f710761612, type: 3}
+    A: {fileID: 21300000, guid: a8d74f717dd78f94b9e95e2e000ce8b5, type: 3}
+    B: {fileID: 21300000, guid: ed54d936836dae64da894306c89dc4cf, type: 3}
+    C: {fileID: 21300000, guid: 3df908981fa1cdc428d5d8edd91163fb, type: 3}
+  _green:
+    Default: {fileID: 21300000, guid: 58e39fdc88be7e64aa90d2f77f316abc, type: 3}
+    A: {fileID: 21300000, guid: ad11bd0688c106b4081e28b57caa6102, type: 3}
+    B: {fileID: 21300000, guid: 5cf6289abedfe8b47a0cf50f62d1a9dd, type: 3}
+    C: {fileID: 21300000, guid: 04a05a96b0b4db54f9cbc0b7a4d0c031, type: 3}
+  _pink:
+    Default: {fileID: 21300000, guid: 2666159f020ebfa46b28fbd9ef94abd1, type: 3}
+    A: {fileID: 21300000, guid: 4c09b7d1b2cb2cf44ab5b558257dc2a7, type: 3}
+    B: {fileID: 21300000, guid: 14741bee90f127741af9693b14a0356a, type: 3}
+    C: {fileID: 21300000, guid: 675956bf3009dcd4b815e665d15f6780, type: 3}
+  _purple:
+    Default: {fileID: 21300000, guid: 8882761a8a90b474faaf9dfea5a82592, type: 3}
+    A: {fileID: 21300000, guid: 66a95fdf28b6ec94893c670c61a38925, type: 3}
+    B: {fileID: 21300000, guid: d4d8c7f3e70d2e547baa135cebe6e2dc, type: 3}
+    C: {fileID: 21300000, guid: 8516c1bbbf823eb428bce378d8764505, type: 3}
+  _red:
+    Default: {fileID: 21300000, guid: 6deb0764bffcbfb4ebea69d9ff197b39, type: 3}
+    A: {fileID: 21300000, guid: c3b653e9a529d18469b96abde2a58802, type: 3}
+    B: {fileID: 21300000, guid: 46f9d01ff04fd6d4dbca693e0c1884f9, type: 3}
+    C: {fileID: 21300000, guid: 2545a27c0ea4cfd478b304c38cd8c42b, type: 3}
+  _yellow:
+    Default: {fileID: 21300000, guid: 57ed9fbbf8f8a514b82b7c435ad3ca20, type: 3}
+    A: {fileID: 21300000, guid: cbbf44bffeaed834aa2ff03aaba8e6e3, type: 3}
+    B: {fileID: 21300000, guid: 15db0cba73bc9204d91053d29d006c16, type: 3}
+    C: {fileID: 21300000, guid: 2e1b80b8d13a19b498ae0b5b11fe0f97, type: 3}

@@ -7,19 +7,27 @@ namespace YBlast.Installers
 {
     public class GameplaySceneInstaller : MonoInstaller
     {
-        [SerializeField] private GridCreationDataSO _gridCreationDataSo;
+        [SerializeField] private GridCreationDataSO _gridCreationDataSO;
 
         [SerializeField] private SpacingSettingsSO _spacingSettingsSO;
 
-        [SerializeField] private CubePrefabHolderSO _cubePrefabHolder;
+        [SerializeField] private CubePrefabHolderSO _cubePrefabHolderSO;
+
+        [SerializeField] private ColorCubeSpriteHolderSO _colorCubeSpriteHolderSO;
         
         public override void InstallBindings()
         {
-            Container.BindInstance(_gridCreationDataSo.GridData).AsSingle();
+            #region SO Injection
+
+            Container.BindInstance(_gridCreationDataSO.GridData).AsSingle();
 
             Container.BindInstance(_spacingSettingsSO).AsSingle();
 
-            Container.BindInstance(_cubePrefabHolder).AsSingle();
+            Container.BindInstance(_cubePrefabHolderSO).AsSingle();
+
+            Container.BindInstance(_colorCubeSpriteHolderSO).AsSingle();
+            
+            #endregion
             
             Container.Bind<ICellPositionManager>()
                 .To<YBlast.Managers.CellPosition.Classic.CellPositionManager>()
@@ -28,6 +36,8 @@ namespace YBlast.Installers
             Container.Bind<GridManager>().AsSingle();
 
             Container.Bind<CubeSpawner>().AsSingle();
+
+            Container.Bind<CubeSpriteManager>().AsSingle();
         }
     }
 }
