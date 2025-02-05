@@ -7,11 +7,14 @@ namespace YBlast.Managers
     public class CubeSpawner
     {
         private CubePrefabHolderSO _cubePrefabHolder;
+
+        private CubeSpriteManager _cubeSpriteManager;
         
         [Inject]
-        void Construct(CubePrefabHolderSO cubePrefabHolder)
+        void Construct(CubePrefabHolderSO cubePrefabHolder, CubeSpriteManager cubeSpriteManager)
         {
             _cubePrefabHolder = cubePrefabHolder;
+            _cubeSpriteManager = cubeSpriteManager;
         }
         
         public ColorCube SpawnColorCube(ECubeColor color)
@@ -20,6 +23,9 @@ namespace YBlast.Managers
                 .GetComponent<ColorCube>();
             
             colorCube.SetColor(color);
+            
+            _cubeSpriteManager.SetCorrectSprite(colorCube);
+            
             return colorCube;
         }
     }

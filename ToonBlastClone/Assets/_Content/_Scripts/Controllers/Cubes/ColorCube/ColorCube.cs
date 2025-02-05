@@ -4,6 +4,8 @@ namespace YBlast
 {
     public class ColorCube : BaseCube
     {
+        [SerializeField] private SpriteRenderer _spriteRenderer;
+        
         public override ECubeType Type => ECubeType.ColorCube;
 
         private ECubeColor _color;
@@ -17,6 +19,11 @@ namespace YBlast
         public void SetColor(ECubeColor cubeColor)
         {
             _color = cubeColor;
+        }
+
+        public void SetSprite(Sprite sprite)
+        {
+            _spriteRenderer.sprite = sprite;
         }
     }
 }
