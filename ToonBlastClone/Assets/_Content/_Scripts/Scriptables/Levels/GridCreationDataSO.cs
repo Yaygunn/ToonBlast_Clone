@@ -22,13 +22,13 @@ namespace YBlast
             List<ECubeColor> _colorEnums = new List<ECubeColor>(
                 (ECubeColor[])System.Enum.GetValues(typeof(ECubeColor)));
 
-            Vector2Int gridIndex = new Vector2Int();
+            Vector2Int cellIndex = new Vector2Int();
             
-            for (gridIndex.x = 0; gridIndex.x < _gridSize.x; gridIndex.x++)
+            for (cellIndex.x = 0; cellIndex.x < _gridSize.x; cellIndex.x++)
             {
-                for (gridIndex.y = 0; gridIndex.y < _gridSize.y; gridIndex.y++)
+                for (cellIndex.y = 0; cellIndex.y < _gridSize.y; cellIndex.y++)
                 {
-                    _gridData.SetColorCube(GetRandomCubeColor(), gridIndex);
+                    _gridData.SetColorCube(GetRandomCubeColor(), cellIndex);
                 }
             }
 

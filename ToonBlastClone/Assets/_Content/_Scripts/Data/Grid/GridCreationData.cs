@@ -16,14 +16,14 @@ namespace YBlast.Data
 
         public Vector2Int GridSize => _gridSize;
 
-        public ECubeType GetCubeType(Vector2Int gridIndex)
+        public ECubeType GetCubeType(Vector2Int cellIndex)
         {
-            return _cubeTypes[GetIndex(gridIndex)];
+            return _cubeTypes[GetIndex(cellIndex)];
         }
 
-        public ECubeColor GetCubeColor(Vector2Int gridIndex)
+        public ECubeColor GetCubeColor(Vector2Int cellIndex)
         {
-            return _cubeColors[GetIndex(gridIndex)];
+            return _cubeColors[GetIndex(cellIndex)];
         }
 
         #endregion
@@ -37,23 +37,23 @@ namespace YBlast.Data
             _cubeColors = new ECubeColor[totalSize];
         }
 
-        public void SetCubeType(ECubeType cubeType, Vector2Int gridIndex)
+        public void SetCubeType(ECubeType cubeType, Vector2Int cellIndex)
         {
-            int index = GetIndex(gridIndex);
+            int index = GetIndex(cellIndex);
             _cubeTypes[index] = cubeType;
             _cubeColors[index] = ECubeColor.None;
         }
 
-        public void SetColorCube(ECubeColor cubeColor, Vector2Int gridIndex)
+        public void SetColorCube(ECubeColor cubeColor, Vector2Int cellIndex)
         {
-            int index = GetIndex(gridIndex);
+            int index = GetIndex(cellIndex);
             _cubeTypes[index] = ECubeType.ColorCube;
             _cubeColors[index] = cubeColor;
         }
 
-        private int GetIndex(Vector2Int gridIndex)
+        private int GetIndex(Vector2Int cellIndex)
         {
-            return gridIndex.x + gridIndex.y * _gridSize.x;
+            return cellIndex.x + cellIndex.y * _gridSize.x;
         }
     }
 }
