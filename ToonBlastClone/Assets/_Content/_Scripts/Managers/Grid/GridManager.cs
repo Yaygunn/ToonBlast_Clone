@@ -43,5 +43,10 @@ namespace YBlast.Managers
         {
             return cellIndex.x >= 0 && cellIndex.y >= 0 && cellIndex.x < _grid.GridSize.x && cellIndex.y < _grid.GridSize.y;
         }
+
+        public Vector2Int GetGridSize()
+        {
+            return _grid.GridSize;
+        }
     }
 }
