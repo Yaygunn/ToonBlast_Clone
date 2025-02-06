@@ -11,5 +11,9 @@ namespace YBlast
         {
             _spriteRenderer.sortingOrder = -cellIndex.x;
         }
+
+        public virtual void OnClick()
+        {
+        }
     }
 }
