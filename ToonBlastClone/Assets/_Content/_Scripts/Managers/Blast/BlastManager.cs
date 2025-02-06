@@ -7,11 +7,13 @@ namespace YBlast.Managers
     public class BlastManager
     {
         private GridManager _gridManager;
+        private FallManager _fallManager;
         
         [Inject]
-        void Constuct(NeighborCalculator neighborCalculator, GridManager gridManager)
+        void Constuct(GridManager gridManager, FallManager fallManager)
         {
             _gridManager = gridManager;
+            _fallManager = fallManager;
         }
 
         public void Blast(List<Vector2Int> blastedCubeIndexes)
@@ -24,6 +26,8 @@ namespace YBlast.Managers
         {
             _gridManager.GetBaseCube(blastedCubeIndex).OnBlast();
             _gridManager.RemoveCube(blastedCubeIndex);
+            
+            _fallManager.AddABlastedCell(blastedCubeIndex);
         }
     }
 }

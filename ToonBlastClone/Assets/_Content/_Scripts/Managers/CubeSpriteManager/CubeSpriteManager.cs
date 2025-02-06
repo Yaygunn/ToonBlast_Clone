@@ -16,9 +16,9 @@ namespace YBlast.Managers
 
         private GridManager _gridManager;
 
-        private HashSet<Vector2Int> _cellsToCalculateSprite = new();
+        private HashSet<Vector2Int> _cellsToCalculateSprite; 
 
-        private HashSet<Vector2Int> _calculatedCells = new();
+        private HashSet<Vector2Int> _calculatedCells;
 
         private NeighborCalculator _neighborCalculator;
         
@@ -29,6 +29,10 @@ namespace YBlast.Managers
             _colorCubeSpriteHolderSO = colorCubeSpriteHolderSO;
             _gridManager = gridManager;
             _neighborCalculator = neighborCalculator;
+            
+            _cellsToCalculateSprite = new(_gridManager.GetGridSize().GetMultiplication());
+            _calculatedCells = new(_gridManager.GetGridSize().GetMultiplication());
+
         }
 
         public void Tick()

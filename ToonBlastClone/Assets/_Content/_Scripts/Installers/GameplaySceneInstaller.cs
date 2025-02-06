@@ -44,6 +44,8 @@ namespace YBlast.Installers
             Container.BindInterfacesAndSelfTo<InputListener>().AsSingle();
             
             Container.BindInterfacesAndSelfTo<InputHandler>().AsSingle().NonLazy();
+            
+            Container.BindInterfacesAndSelfTo<FallManager>().AsSingle();
 
             #endregion
 
@@ -69,7 +71,7 @@ namespace YBlast.Installers
             Container.Bind<ColorCubeBlaster>().AsSingle();
 
             Container.Bind<BlastManager>().AsSingle();
-
+            
         }
     }
 }

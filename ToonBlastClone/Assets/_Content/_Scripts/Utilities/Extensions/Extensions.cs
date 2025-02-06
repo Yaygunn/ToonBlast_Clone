@@ -18,5 +18,10 @@ namespace YBlast.Utilities
             vector.z += zChange;
             return vector;
         }
+        
+        public static int GetMultiplication(this Vector2Int vector)
+        {
+            return vector.x * vector.y;
+        }
     }
 }

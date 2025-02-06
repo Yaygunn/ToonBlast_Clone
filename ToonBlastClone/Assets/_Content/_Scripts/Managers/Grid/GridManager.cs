@@ -48,5 +48,13 @@ namespace YBlast.Managers
         {
             return _grid.GridSize;
         }
+
+        public ECubeType GetCubeType(Vector2Int cellIndex)
+        {
+            BaseCube cube = _grid.Cubes[cellIndex.x, cellIndex.y];
+            if (cube == null)
+                return ECubeType.None;
+            return cube.Type;
+        }
     }
 }
