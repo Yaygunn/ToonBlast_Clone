@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -8,7 +9,7 @@ using Zenject;
 
 namespace YBlast.Managers
 {
-    public class CubeSpriteManager : ITickable
+    public class CubeSpriteManager : ITickable, IDisposable
     {
         private GroupRules _groupRules;
         
@@ -33,8 +34,22 @@ namespace YBlast.Managers
             _cellsToCalculateSprite = new(_gridManager.GetGridSize().GetMultiplication());
             _calculatedCells = new(_gridManager.GetGridSize().GetMultiplication());
 
+            #region EventSubscription
+
+            EventHub.Ev_CubeReachedFallDestination += AddColorCubeToCalculation;
+
+            #endregion
+
         }
 
+        public void Dispose()
+        {
+            #region UnSubscribe
+            
+            EventHub.Ev_CubeReachedFallDestination -= AddColorCubeToCalculation;
+
+            #endregion
+        }
         public void Tick()
         {
             CalculateAndChangeSprites();
@@ -86,6 +101,13 @@ namespace YBlast.Managers
                 
                 SetCorrectSprites(sameColorNeighbors);
             }
+            
+            _cellsToCalculateSprite.Clear();
+        }
+
+        private void AddColorCubeToCalculation(Vector2Int cellIndex)
+        {
+            _cellsToCalculateSprite.Add(cellIndex);
         }
     }
 }

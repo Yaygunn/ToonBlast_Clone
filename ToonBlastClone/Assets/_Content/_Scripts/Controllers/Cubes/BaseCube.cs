@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 namespace YBlast
@@ -5,12 +6,16 @@ namespace YBlast
     public class BaseCube : MonoBehaviour
     {
         [SerializeField] protected SpriteRenderer _spriteRenderer;
+
+        private const float _gravityMultiply = 0.1f;
         
         public virtual ECubeType Type => ECubeType.None;
 
         public virtual bool IsFallable => true;
         
         public Vector2Int CellIndex { get; private set; }
+
+        private Sequence _tweenSequence;
 
         public virtual void SetCellIndex(Vector2Int cellIndex)
         {
@@ -30,8 +35,14 @@ namespace YBlast
 
         public void Fall(Vector3 fallDestination)
         {
-            transform.position = fallDestination;
-            FallenToDestination();
+            float time = Mathf.Sqrt((2 * (fallDestination - transform.position).magnitude) * _gravityMultiply);
+            
+            _tweenSequence.Kill();
+            
+            _tweenSequence = DOTween.Sequence();
+
+            _tweenSequence.Append(transform.DOMove(fallDestination, time).SetEase(Ease.OutBounce));
+            _tweenSequence.Insert(time * 0.6f, DOTween.To(() => 0, x => { }, 1, 0).OnComplete(FallenToDestination));
         }
 
         protected virtual void FallenToDestination()

@@ -52,5 +52,10 @@ namespace YBlast
         {
             _returnToPoolCallBack = returnToPoolCallBack;
         }
+
+        protected override void FallenToDestination()
+        {
+            EventHub.CubeReachedFallDestination(CellIndex);
+        }
     }
 }

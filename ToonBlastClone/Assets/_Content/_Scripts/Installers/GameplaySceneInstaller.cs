@@ -46,6 +46,9 @@ namespace YBlast.Installers
             Container.BindInterfacesAndSelfTo<InputHandler>().AsSingle().NonLazy();
             
             Container.BindInterfacesAndSelfTo<FallManager>().AsSingle();
+            
+            Container.BindInterfacesAndSelfTo<CubeSpriteManager>().AsSingle();
+
 
             #endregion
 
@@ -63,8 +66,6 @@ namespace YBlast.Installers
             Container.Bind<GridManager>().AsSingle();
 
             Container.Bind<CubeSpawner>().AsSingle();
-
-            Container.Bind<CubeSpriteManager>().AsSingle();
 
             Container.Bind<NeighborCalculator>().AsSingle();
 
