@@ -1,3 +1,4 @@
+using Systems.ObjectPool;
 using UnityEngine;
 using UnityEngine.Serialization;
 using YBlast.Managers;
@@ -8,6 +9,7 @@ namespace YBlast.Installers
 {
     public class GameplaySceneInstaller : MonoInstaller
     {
+        [Header("SO")]
         [SerializeField] private LevelDataSO _levelDataSO;
 
         [SerializeField] private SpacingSettingsSO _spacingSettingsSO;
@@ -17,6 +19,7 @@ namespace YBlast.Installers
         [SerializeField] private ColorCubeSpriteHolderSO _colorCubeSpriteHolderSO;
 
         [SerializeField] private LayerMasksSO _layerMasksSO;
+
         
         public override void InstallBindings()
         {
@@ -36,6 +39,21 @@ namespace YBlast.Installers
             
             #endregion
             
+            #region WithInterfaces
+
+            Container.BindInterfacesAndSelfTo<InputListener>().AsSingle();
+            
+            Container.BindInterfacesAndSelfTo<InputHandler>().AsSingle().NonLazy();
+
+            #endregion
+
+            #region Hierarcy
+
+            Container.Bind<ObjectPoolSystem>().FromComponentInHierarchy().AsSingle();
+
+            #endregion
+
+            
             Container.Bind<ICellPositionManager>()
                 .To<YBlast.Managers.CellPosition.Classic.CellPositionManager>()
                 .AsSingle();
@@ -48,9 +66,10 @@ namespace YBlast.Installers
 
             Container.Bind<NeighborCalculator>().AsSingle();
 
-            Container.BindInterfacesAndSelfTo<InputListener>().AsSingle();
-            
-            Container.BindInterfacesAndSelfTo<InputHandler>().AsSingle().NonLazy();
+            Container.Bind<ColorCubeBlaster>().AsSingle();
+
+            Container.Bind<BlastManager>().AsSingle();
+
         }
     }
 }
