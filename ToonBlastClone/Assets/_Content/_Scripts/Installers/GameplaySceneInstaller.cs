@@ -15,6 +15,8 @@ namespace YBlast.Installers
         [SerializeField] private CubePrefabHolderSO _cubePrefabHolderSO;
 
         [SerializeField] private ColorCubeSpriteHolderSO _colorCubeSpriteHolderSO;
+
+        [SerializeField] private LayerMasksSO _layerMasksSO;
         
         public override void InstallBindings()
         {
@@ -30,6 +32,8 @@ namespace YBlast.Installers
 
             Container.BindInstance(_colorCubeSpriteHolderSO).AsSingle();
             
+            Container.BindInstance(_layerMasksSO).AsSingle();
+            
             #endregion
             
             Container.Bind<ICellPositionManager>()
@@ -43,6 +47,10 @@ namespace YBlast.Installers
             Container.Bind<CubeSpriteManager>().AsSingle();
 
             Container.Bind<NeighborCalculator>().AsSingle();
+
+            Container.BindInterfacesAndSelfTo<InputListener>().AsSingle();
+            
+            Container.BindInterfacesAndSelfTo<InputHandler>().AsSingle().NonLazy();
         }
     }
 }

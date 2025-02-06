@@ -81,6 +81,7 @@ MonoBehaviour:
   _spacingSettingsSO: {fileID: 11400000, guid: 277af0b1d1f184f4f828895473121baf, type: 2}
   _cubePrefabHolderSO: {fileID: 11400000, guid: 8e01db2b31d7f8b4abad4ed120f4e979, type: 2}
   _colorCubeSpriteHolderSO: {fileID: 11400000, guid: 8f3414ef1d67cae47b162f57493e2d65, type: 2}
+  _layerMasksSO: {fileID: 11400000, guid: 8bd22fe2e6127324f9ece40b3fe239ec, type: 2}
 --- !u!1 &5778761997136155112
 GameObject:
   m_ObjectHideFlags: 0
