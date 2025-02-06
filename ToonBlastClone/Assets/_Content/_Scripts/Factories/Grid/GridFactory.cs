@@ -39,13 +39,11 @@ namespace YBlast.Factories
         private void Start()
         {
             FillGridAccordingToGridCreationData();
-            ChangeGroupSprites();
+            _cubeSpriteManager.ResetSpritesOfAllColorCubes();
         }
 
         private void FillGridAccordingToGridCreationData()
         {
-            Vector2Int cellIndex = Vector2Int.zero;
-            
             VectorUtilities.OperateOnEachIndex(_gridCreationData.GridSize ,FillACell);
 
             void FillACell(Vector2Int cellIndex)
@@ -57,26 +55,6 @@ namespace YBlast.Factories
                 cubeTransform.position = _cellPositionManager.GetCellPos(cellIndex);
                     
                 _gridManager.PlaceCube(cube, cellIndex);
-            }
-        }
-
-        private void ChangeGroupSprites()
-        {
-            HashSet<Vector2Int> calculatedCells = new(_gridCreationData.GridSize.x * _gridCreationData.GridSize.y);
-            
-            VectorUtilities.OperateOnEachIndex(_gridCreationData.GridSize, SetCorrectSprite);
-
-            void SetCorrectSprite(Vector2Int cellIndex)
-            {
-                if(calculatedCells.Contains(cellIndex))
-                    return;
-
-                List<Vector2Int> sameColorCells = _neighborCalculator.CalculateSameColorNeighbors(cellIndex);
-                
-                foreach (Vector2Int cellElementIndex in sameColorCells )
-                    calculatedCells.Add(cellElementIndex);
-                
-                _cubeSpriteManager.SetCorrectSprites(sameColorCells);
             }
         }
     }

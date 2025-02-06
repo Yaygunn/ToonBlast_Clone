@@ -1,25 +1,45 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using YBlast.Data;
 using YBlast.Scriptables;
+using YBlast.Utilities;
 using Zenject;
 
 namespace YBlast.Managers
 {
-    public class CubeSpriteManager
+    public class CubeSpriteManager : ITickable
     {
         private GroupRules _groupRules;
         
         private ColorCubeSpriteHolderSO _colorCubeSpriteHolderSO;
 
         private GridManager _gridManager;
+
+        private HashSet<Vector2Int> _cellsToCalculateSprite = new();
+
+        private HashSet<Vector2Int> _calculatedCells = new();
+
+        private NeighborCalculator _neighborCalculator;
         
         [Inject]
-        void Construct(GroupRules groupRules, ColorCubeSpriteHolderSO colorCubeSpriteHolderSO, GridManager gridManager)
+        void Construct(GroupRules groupRules, ColorCubeSpriteHolderSO colorCubeSpriteHolderSO, GridManager gridManager, NeighborCalculator neighborCalculator)
         {
             _groupRules = groupRules;
             _colorCubeSpriteHolderSO = colorCubeSpriteHolderSO;
             _gridManager = gridManager;
+            _neighborCalculator = neighborCalculator;
+        }
+
+        public void Tick()
+        {
+            CalculateAndChangeSprites();
+        }
+
+        public void ResetSpritesOfAllColorCubes()
+        {
+            _cellsToCalculateSprite = VectorUtilities.GetAllIndexesOfGridAsList(_gridManager.GetGridSize()).ToHashSet();
+            CalculateAndChangeSprites();
         }
 
         public void SetCorrectSprite(ColorCube cube)
@@ -41,6 +61,26 @@ namespace YBlast.Managers
             {
                 ((ColorCube)_gridManager.GetBaseCube(cellIndex)).SetSprite(sprite);
                 
+            }
+        }
+
+        private void CalculateAndChangeSprites()
+        {
+            _calculatedCells.Clear();
+            
+            foreach (var VARIABLE in _cellsToCalculateSprite)
+            {
+                if(_gridManager.GetCubeColor(VARIABLE) == ECubeColor.None)
+                    continue;
+                if(_calculatedCells.Contains(VARIABLE))
+                    continue;
+
+                List<Vector2Int> sameColorNeighbors = _neighborCalculator.CalculateSameColorNeighbors(VARIABLE);
+
+                for (int i = 0; i < sameColorNeighbors.Count; i++)
+                    _calculatedCells.Add(sameColorNeighbors[i]);
+                
+                SetCorrectSprites(sameColorNeighbors);
             }
         }
     }

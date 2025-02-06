@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace YBlast.Utilities
@@ -16,6 +17,15 @@ namespace YBlast.Utilities
                     operationAction(cellIndex);
                 }
             }
+        }
+
+        public static List<Vector2Int> GetAllIndexesOfGridAsList(Vector2Int gridSize)
+        {
+            List<Vector2Int> indexList = new();
+
+            OperateOnEachIndex(gridSize, (cellIndex)=> indexList.Add(cellIndex));
+
+            return indexList;
         }
     }
 }
