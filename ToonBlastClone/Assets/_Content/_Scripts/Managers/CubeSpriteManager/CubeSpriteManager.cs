@@ -8,11 +8,18 @@ namespace YBlast.Managers
 {
     public class CubeSpriteManager
     {
+        private GroupRules _groupRules;
+        
         private ColorCubeSpriteHolderSO _colorCubeSpriteHolderSO;
+
+        private GridManager _gridManager;
+        
         [Inject]
-        void Construct(ColorCubeSpriteHolderSO colorCubeSpriteHolderSO)
+        void Construct(GroupRules groupRules, ColorCubeSpriteHolderSO colorCubeSpriteHolderSO, GridManager gridManager)
         {
+            _groupRules = groupRules;
             _colorCubeSpriteHolderSO = colorCubeSpriteHolderSO;
+            _gridManager = gridManager;
         }
 
         public void SetCorrectSprite(ColorCube cube)
@@ -27,7 +34,14 @@ namespace YBlast.Managers
 
         public void SetCorrectSprites(List<Vector2Int> cellIndexes)
         {
+            Sprite sprite = _colorCubeSpriteHolderSO.GetSprite(_gridManager.GetCubeColor(cellIndexes[0]),
+                _groupRules.GetColorVersion(cellIndexes.Count));
             
+            foreach (var cellIndex in cellIndexes)
+            {
+                ((ColorCube)_gridManager.GetBaseCube(cellIndex)).SetSprite(sprite);
+                
+            }
         }
     }
 }

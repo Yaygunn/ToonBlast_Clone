@@ -22,6 +22,8 @@ namespace YBlast.Installers
 
             Container.BindInstance(_levelDataSO.GridData).AsSingle();
 
+            Container.BindInstance(_levelDataSO.GroupRules).AsSingle();
+
             Container.BindInstance(_spacingSettingsSO).AsSingle();
 
             Container.BindInstance(_cubePrefabHolderSO).AsSingle();
@@ -39,6 +41,8 @@ namespace YBlast.Installers
             Container.Bind<CubeSpawner>().AsSingle();
 
             Container.Bind<CubeSpriteManager>().AsSingle();
+
+            Container.Bind<NeighborCalculator>().AsSingle();
         }
     }
 }
