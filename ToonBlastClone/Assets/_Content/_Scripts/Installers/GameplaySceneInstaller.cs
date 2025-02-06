@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using YBlast.Managers;
 using Zenject;
 using YBlast.Scriptables;
@@ -7,7 +8,7 @@ namespace YBlast.Installers
 {
     public class GameplaySceneInstaller : MonoInstaller
     {
-        [SerializeField] private GridCreationDataSO _gridCreationDataSO;
+        [SerializeField] private LevelDataSO _levelDataSO;
 
         [SerializeField] private SpacingSettingsSO _spacingSettingsSO;
 
@@ -19,7 +20,7 @@ namespace YBlast.Installers
         {
             #region SO Injection
 
-            Container.BindInstance(_gridCreationDataSO.GridData).AsSingle();
+            Container.BindInstance(_levelDataSO.GridData).AsSingle();
 
             Container.BindInstance(_spacingSettingsSO).AsSingle();
 
