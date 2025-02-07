@@ -11,9 +11,13 @@ namespace YBlast
 
         [SerializeField] private GridCreationData _gridData;
 
+        [SerializeField] private ColorPossibilities _colorPossibilities;
+        
         [SerializeField] private GroupRules _groupRules;
+        
 
         public GridCreationData GridData => _gridData;
+        public ColorPossibilities ColorPossibilities => _colorPossibilities;
         public GroupRules GroupRules => _groupRules;
 
         #if UNITY_EDITOR

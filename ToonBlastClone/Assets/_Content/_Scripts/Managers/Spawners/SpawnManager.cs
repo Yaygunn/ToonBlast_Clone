@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using ModestTree.Util;
 using UnityEngine;
+using YBlast.Data;
 using Zenject;
 
 namespace YBlast.Managers
@@ -16,17 +17,20 @@ namespace YBlast.Managers
 
         private ICellPositionManager _cellPositionManager;
 
+        private ColorPossibilities _colorPossibilities;
+
         private List<Vector2Int> _spawnTargets = new(10);
         
         private Dictionary<Vector2Int, ECubeColor> _placementDictionary = new(10);
         
         [Inject]
-        void Construct(GridManager gridManager, CubeSpawner cubeSpawner, NeighborCalculator neighborCalculator, ICellPositionManager cellPositionManager)
+        void Construct(GridManager gridManager, CubeSpawner cubeSpawner, NeighborCalculator neighborCalculator, ICellPositionManager cellPositionManager, ColorPossibilities colorPossibilities)
         {
             _gridManager = gridManager;
             _cubeSpawner = cubeSpawner;
             _neighborCalculator = neighborCalculator;
             _cellPositionManager = cellPositionManager;
+            _colorPossibilities = colorPossibilities;
         }
 
         public void SpawnCubes(List<Vector2Int> spawnTargets, Action<BaseCube,Vector2Int> fallAction)
@@ -93,7 +97,7 @@ namespace YBlast.Managers
 
         private ECubeColor GetRandomColorFromPossibleColors()
         {
-            return ECubeColor.Blue;
+            return _colorPossibilities.GetRandomColor();
         }
     }
 }

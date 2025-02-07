@@ -36,6 +36,8 @@ namespace YBlast.Installers
             Container.BindInstance(_colorCubeSpriteHolderSO).AsSingle();
             
             Container.BindInstance(_layerMasksSO).AsSingle();
+
+            Container.BindInstance(_levelDataSO.ColorPossibilities).AsSingle();
             
             #endregion
             
