@@ -27,8 +27,6 @@ namespace YBlast.Managers
             foreach (Vector2Int cellIndex in blastGroup)
                 _blastManager.Blast(cellIndex);
 
-            var damagedGroup = _neighborCalculator.GetDamagedCellsAroundBlastedGroup(blastGroup);
-                
             return true;
         }
     }
