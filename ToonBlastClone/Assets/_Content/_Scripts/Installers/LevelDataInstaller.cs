@@ -23,6 +23,8 @@ namespace YBlast.Installers
             
             Container.BindInstance(_levelDataSO.ColorPossibilities).AsSingle();
 
+            Container.BindInstance(_levelDataSO.Goals).AsSingle();
+
         }
 
         private void SetLevelData()

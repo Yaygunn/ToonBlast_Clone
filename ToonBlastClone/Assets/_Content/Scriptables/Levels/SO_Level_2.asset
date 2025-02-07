@@ -23,3 +23,7 @@ MonoBehaviour:
     _groupSizeForA: 3
     _groupSizeForB: 5
     _groupSizeForC: 7
+  _goals:
+    _goal:
+      CubeColor: 3
+      Amount: 20
