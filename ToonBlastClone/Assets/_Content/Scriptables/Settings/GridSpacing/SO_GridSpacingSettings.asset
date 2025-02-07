@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6179bdd7070dbc74cbbce67ab1f6e016, type: 3}
   m_Name: SO_GridSpacingSettings
   m_EditorClassIdentifier: 
-  _cellSize: 0.8
+  _cellSize: 0.46
   _cellSpacing: 0
   _spawnYOffset: 1.5
