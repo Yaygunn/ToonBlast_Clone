@@ -10,9 +10,16 @@ namespace YBlast.Data
     {
         [SerializeField] private List<ECubeColor> _colorPossibilities;
 
+        public int NumberOfDifferentColors => _colorPossibilities.Count;
+
         public ECubeColor GetRandomColor()
         {
             return _colorPossibilities[Random.Range(0, _colorPossibilities.Count)];
+        }
+
+        public List<ECubeColor> GetAllColors()
+        {
+            return _colorPossibilities;
         }
     }
 }

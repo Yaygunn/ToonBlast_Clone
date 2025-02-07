@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
 using YBlast.Managers;
@@ -40,6 +41,7 @@ namespace YBlast.Factories
         {
             FillGridAccordingToGridCreationData();
             _cubeSpriteManager.ResetSpritesOfAllColorCubes();
+            OtherSettings();
         }
 
         private void FillGridAccordingToGridCreationData()
@@ -56,6 +58,11 @@ namespace YBlast.Factories
                     
                 _gridManager.PlaceCube(cube, cellIndex);
             }
+        }
+        
+        private void OtherSettings()
+        {
+            DOTween.SetTweensCapacity(500, 250);
         }
     }
 }

@@ -44,6 +44,16 @@ namespace Systems.ObjectPool
             return obj;
         }
 
+        public void InitializeQueue(GameObject prefab, int length)
+        {
+            if (_poolDictionary.ContainsKey(prefab))
+            {
+                Debug.LogError("pool list already initialized");
+                return;
+            }
+            _poolDictionary[prefab] = new Queue<GameObject>(length);
+        }
+
         private void ReturnObject(GameObject prefab, GameObject obj)
         {
             obj.SetActive(false);
