@@ -38,11 +38,12 @@ namespace YBlast.Managers
 
             EventHub.Ev_ColorCubeReachedFallDestination += AddSingleCellToCalculation;
             EventHub.Ev_ColorCubeStartFalling += AddSelfAndNeighborsToCalculateList;
-            EventHub.Ev_ColorCubeBlasted += AddSelfAndNeighborsToCalculateList;
 
             #endregion
 
         }
+
+        
 
         public void Dispose()
         {
@@ -50,7 +51,6 @@ namespace YBlast.Managers
             
             EventHub.Ev_ColorCubeReachedFallDestination -= AddSingleCellToCalculation;
             EventHub.Ev_ColorCubeStartFalling -= AddSelfAndNeighborsToCalculateList;
-            EventHub.Ev_ColorCubeBlasted -= AddSelfAndNeighborsToCalculateList;
 
             #endregion
         }

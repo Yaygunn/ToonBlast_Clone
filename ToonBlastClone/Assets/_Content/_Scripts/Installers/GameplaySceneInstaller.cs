@@ -43,6 +43,8 @@ namespace YBlast.Installers
             
             Container.BindInterfacesAndSelfTo<CubeSpriteManager>().AsSingle();
 
+            Container.BindInterfacesAndSelfTo<GoalManager>().AsSingle().NonLazy();
+
 
             #endregion
 

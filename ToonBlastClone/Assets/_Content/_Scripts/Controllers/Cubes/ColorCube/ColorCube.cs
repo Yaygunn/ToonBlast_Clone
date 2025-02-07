@@ -46,7 +46,7 @@ namespace YBlast
 
         public override void OnBlast()
         {
-            EventHub.ColorCubeBlasted(CellIndex);
+            EventHub.ColorCubeBlasted(CellIndex,_color);
             _returnToPoolCallBack();
         }
 

@@ -11,6 +11,8 @@ namespace YBlast.Managers
 
         private LayerMask _cubeLayerMask;
 
+        private bool _isGameActive = true;
+
         [Inject]
         void Construct(InputListener inputListener, LayerMasksSO layerMasksSO)
         {
@@ -18,10 +20,23 @@ namespace YBlast.Managers
             _inputListener.OnPressed += OnPressed;
 
             _cubeLayerMask = layerMasksSO.CubeLayerMask;
+
+            EventHub.Ev_GameWon += OnGameWon;
+        }
+
+        public void Dispose()
+        {
+            _inputListener.OnPressed -= OnPressed;
+            _inputListener = null;
+            
+            EventHub.Ev_GameWon -= OnGameWon;
         }
 
         private void OnPressed(Vector2 pressPosition)
         {
+            if(!_isGameActive)
+                return;
+            
             BaseCube cubeUnderMouse = GetCubeUnderMouse(pressPosition);
             
             cubeUnderMouse?.OnClick();
@@ -39,11 +54,12 @@ namespace YBlast.Managers
             }
             return null;
         }
-
-        public void Dispose()
+        
+        private void OnGameWon()
         {
-            _inputListener.OnPressed -= OnPressed;
-            _inputListener = null;
+            _isGameActive = false;
         }
+
+        
     }
 }
