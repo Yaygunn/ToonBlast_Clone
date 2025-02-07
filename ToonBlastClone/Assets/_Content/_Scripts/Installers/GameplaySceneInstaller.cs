@@ -9,9 +9,7 @@ namespace YBlast.Installers
 {
     public class GameplaySceneInstaller : MonoInstaller
     {
-        [Header("SO")]
-        [SerializeField] private LevelDataSO _levelDataSO;
-
+        [Header("SO")] 
         [SerializeField] private SpacingSettingsSO _spacingSettingsSO;
 
         [SerializeField] private CubePrefabHolderSO _cubePrefabHolderSO;
@@ -19,15 +17,11 @@ namespace YBlast.Installers
         [SerializeField] private ColorCubeSpriteHolderSO _colorCubeSpriteHolderSO;
 
         [SerializeField] private LayerMasksSO _layerMasksSO;
-
         
         public override void InstallBindings()
         {
             #region SO Injection
 
-            Container.BindInstance(_levelDataSO.GridData).AsSingle();
-
-            Container.BindInstance(_levelDataSO.GroupRules).AsSingle();
 
             Container.BindInstance(_spacingSettingsSO).AsSingle();
 
@@ -37,8 +31,6 @@ namespace YBlast.Installers
             
             Container.BindInstance(_layerMasksSO).AsSingle();
 
-            Container.BindInstance(_levelDataSO.ColorPossibilities).AsSingle();
-            
             #endregion
             
             #region WithInterfaces
