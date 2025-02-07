@@ -25,5 +25,5 @@ MonoBehaviour:
     _groupSizeForC: 4
   _goals:
     _goal:
-      CubeColor: 1
+      CubeColor: 2
       Amount: 20
