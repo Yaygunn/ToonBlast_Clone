@@ -1195,10 +1195,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4510269458349027176, guid: ef27dadbbbf79124f8b9b42232f49da3, type: 3}
-      propertyPath: orthographic size
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 7065321835583154497, guid: ef27dadbbbf79124f8b9b42232f49da3, type: 3}
       propertyPath: m_Name
       value: Cameras
@@ -1300,10 +1296,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Factories
       objectReference: {fileID: 0}
-    - target: {fileID: 9079630394741526460, guid: 56fac97f4dc288b4782b5861f2363921, type: 3}
-      propertyPath: _prefabColorCube
-      value: 
-      objectReference: {fileID: 150662928383895718, guid: 1941e8123e39e7b4ea42a9fd29a89577, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -12,7 +12,7 @@ namespace YBlast.Managers.CellPosition.Classic
         
         private Vector3 _cell00Pos = Vector3.zero;
 
-        private Vector3 _centerPos = Vector3.zero;
+        private Vector3 _centerPos = new Vector3(0,-1);
 
         private float _spaceBetweenCells = 0;
         
