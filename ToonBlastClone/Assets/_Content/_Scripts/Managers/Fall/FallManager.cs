@@ -81,18 +81,12 @@ namespace YBlast.Managers
                 if (rowIndex == -1)
                     return;
                 
-                var cellAbove = FindLowestFallableCell(columbIndex, rowIndex - 1);
+                int cellAbove = FindLowestFallableCell(columbIndex, rowIndex - 1);
 
-                if (!cellAbove.isFallable)
-                {
-                    rowIndex = cellAbove.rowIndex + 1;
-                    continue;
-                }
-                
-                if(cellAbove.rowIndex == -1)
+                if(cellAbove == -1)
                     SpawnAndFall(new Vector2Int(rowIndex,columbIndex));
                 else
-                    FallCube(new Vector2Int(cellAbove.rowIndex, columbIndex), new Vector2Int(rowIndex, columbIndex));
+                    FallCube(new Vector2Int(cellAbove, columbIndex), new Vector2Int(rowIndex, columbIndex));
                 
             }
             
@@ -110,7 +104,7 @@ namespace YBlast.Managers
             return cellIndex.x;
         }
 
-        private (bool isFallable, int rowIndex) FindLowestFallableCell(int columbIndex, int startRowIndex)
+        private int FindLowestFallableCell(int columbIndex, int startRowIndex)
         {
             Vector2Int cellIndex = new Vector2Int(startRowIndex, columbIndex);
 
@@ -119,12 +113,10 @@ namespace YBlast.Managers
                 if (_gridManager.GetCubeType(cellIndex) == ECubeType.None)
                     continue;
 
-                if (_gridManager.GetBaseCube(cellIndex).IsFallable)
-                    return (true,cellIndex.x);
-                else
-                    return (false, cellIndex.x);
+                return cellIndex.x;
             }
-            return (true, -1);
+
+            return -1;
         }
     }
 }

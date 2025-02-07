@@ -11,8 +11,6 @@ namespace YBlast
         private const float _gravityMultiply = 0.08f;
         
         public virtual ECubeType Type => ECubeType.None;
-
-        public virtual bool IsFallable => true;
         
         public bool IsPerforming { get; private set; } // if true falling or being blasted
         
