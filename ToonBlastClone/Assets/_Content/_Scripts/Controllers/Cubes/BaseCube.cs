@@ -25,7 +25,10 @@ namespace YBlast
 
         public virtual void OnClick()
         {
-            Debug.Log("play cube shake anim");
+           Transform tr= _spriteRenderer.transform;
+           tr.DOKill();
+           tr.rotation = Quaternion.identity;
+           tr.DOShakeRotation(0.5f, new Vector3(0, 0, 30), 10);
         }
 
         public virtual void OnBlast()
@@ -33,7 +36,7 @@ namespace YBlast
             Debug.Log("blasted");
         }
 
-        public void Fall(Vector3 fallDestination)
+        public virtual void Fall(Vector3 fallDestination)
         {
             float time = Mathf.Sqrt((2 * (fallDestination - transform.position).magnitude) * _gravityMultiply);
             

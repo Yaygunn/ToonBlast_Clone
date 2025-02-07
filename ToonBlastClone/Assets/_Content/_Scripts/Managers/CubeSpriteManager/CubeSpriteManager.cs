@@ -36,7 +36,9 @@ namespace YBlast.Managers
 
             #region EventSubscription
 
-            EventHub.Ev_CubeReachedFallDestination += AddColorCubeToCalculation;
+            EventHub.Ev_ColorCubeReachedFallDestination += AddSingleCellToCalculation;
+            EventHub.Ev_ColorCubeStartFalling += AddSelfAndNeighborsToCalculateList;
+            EventHub.Ev_ColorCubeBlasted += AddSelfAndNeighborsToCalculateList;
 
             #endregion
 
@@ -46,7 +48,9 @@ namespace YBlast.Managers
         {
             #region UnSubscribe
             
-            EventHub.Ev_CubeReachedFallDestination -= AddColorCubeToCalculation;
+            EventHub.Ev_ColorCubeReachedFallDestination -= AddSingleCellToCalculation;
+            EventHub.Ev_ColorCubeStartFalling -= AddSelfAndNeighborsToCalculateList;
+            EventHub.Ev_ColorCubeBlasted -= AddSelfAndNeighborsToCalculateList;
 
             #endregion
         }
@@ -89,6 +93,8 @@ namespace YBlast.Managers
             
             foreach (var VARIABLE in _cellsToCalculateSprite)
             {
+                if(!_gridManager.IsValidIndex(VARIABLE))
+                    continue;
                 if(_gridManager.GetCubeColor(VARIABLE) == ECubeColor.None)
                     continue;
                 if(_calculatedCells.Contains(VARIABLE))
@@ -105,9 +111,15 @@ namespace YBlast.Managers
             _cellsToCalculateSprite.Clear();
         }
 
-        private void AddColorCubeToCalculation(Vector2Int cellIndex)
+        private void AddSingleCellToCalculation(Vector2Int cellIndex)
         {
             _cellsToCalculateSprite.Add(cellIndex);
+        }
+
+        private void AddSelfAndNeighborsToCalculateList(Vector2Int cellIndex)
+        {
+            VectorUtilities.OperateForEachDirection(cellIndex, AddSingleCellToCalculation);
+            AddSingleCellToCalculation(cellIndex);
         }
     }
 }

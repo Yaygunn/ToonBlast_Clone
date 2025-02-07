@@ -15,6 +15,8 @@ namespace YBlast
         private ColorCubeBlaster _cubeBlaster;
 
         private Action _returnToPoolCallBack;
+
+        private Vector2Int _previousCellIndex;
         
         #region Getters
         public ECubeColor CubeColor => _color;
@@ -44,6 +46,7 @@ namespace YBlast
 
         public override void OnBlast()
         {
+            EventHub.ColorCubeBlasted(CellIndex);
             _returnToPoolCallBack();
         }
 
@@ -53,9 +56,21 @@ namespace YBlast
             _returnToPoolCallBack = returnToPoolCallBack;
         }
 
+        public override void SetCellIndex(Vector2Int cellIndex)
+        {
+            _previousCellIndex = CellIndex;
+            base.SetCellIndex(cellIndex);
+        }
+
+        public override void Fall(Vector3 fallDestination)
+        {
+            base.Fall(fallDestination);
+            EventHub.ColorCubeStartFalling(_previousCellIndex);
+        }
+
         protected override void FallenToDestination()
         {
-            EventHub.CubeReachedFallDestination(CellIndex);
+            EventHub.ColorCubeReachedFallDestination(CellIndex);
         }
     }
 }

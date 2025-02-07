@@ -27,5 +27,13 @@ namespace YBlast.Utilities
 
             return indexList;
         }
+
+        public static void OperateForEachDirection(Vector2Int vector, Action<Vector2Int> operation)
+        {
+            operation(vector.Add(1, 0));
+            operation(vector.Add(-1, 0));
+            operation(vector.Add(0, -1));
+            operation(vector.Add(0, 1));
+        }
     }
 }
