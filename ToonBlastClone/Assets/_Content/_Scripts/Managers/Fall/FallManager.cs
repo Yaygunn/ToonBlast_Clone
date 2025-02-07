@@ -10,16 +10,20 @@ namespace YBlast.Managers
 
         private ICellPositionManager _cellPositionManager;
 
+        private SpawnManager _spawnManager;
+
         private HashSet<int> _blastedColumbs;
 
         private int _gridHeight;
 
-
+        private List<Vector2Int> _cellsThatNeedSpawn = new();
+        
         [Inject]
-        void Construct(GridManager gridManager, ICellPositionManager cellPositionManager)
+        void Construct(GridManager gridManager, ICellPositionManager cellPositionManager, SpawnManager spawnManager)
         {
             _gridManager = gridManager;
             _cellPositionManager = cellPositionManager;
+            _spawnManager = spawnManager;
 
             _gridHeight = _gridManager.GetGridSize().x;
             _blastedColumbs = new(_gridManager.GetGridSize().y);
@@ -41,6 +45,9 @@ namespace YBlast.Managers
                 ColumbFall(columb);
             
             _blastedColumbs.Clear();
+            
+            _spawnManager.SpawnCubes(_cellsThatNeedSpawn, FallToACell);
+            _cellsThatNeedSpawn.Clear();
         }
 
         private void FallCube(Vector2Int cellIndex, Vector2Int destinationIndex)
@@ -48,15 +55,20 @@ namespace YBlast.Managers
             BaseCube cube = _gridManager.GetBaseCube(cellIndex);
             _gridManager.RemoveCube(cellIndex);
             
+            FallToACell(cube, destinationIndex);
+        }
+
+        private void SpawnAndFall( Vector2Int destinationIndex)
+        {
+            _cellsThatNeedSpawn.Add(destinationIndex);
+        }
+
+        private void FallToACell(BaseCube cube, Vector2Int destinationIndex)
+        {
             _gridManager.PlaceCube(cube, destinationIndex);
             cube.Fall(_cellPositionManager.GetCellPos(destinationIndex));
         }
-
-        private void SpawnAndFall(Vector2Int destinationIndex)
-        {
-            
-        }
-
+        
         private void ColumbFall(int columbIndex)
         {
             int rowIndex = _gridHeight;

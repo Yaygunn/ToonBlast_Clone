@@ -72,7 +72,9 @@ namespace YBlast.Installers
             Container.Bind<ColorCubeBlaster>().AsSingle();
 
             Container.Bind<BlastManager>().AsSingle();
-            
+
+            Container.Bind<SpawnManager>().AsSingle();
+
         }
     }
 }

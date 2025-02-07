@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 using YBlast.Data;
@@ -55,6 +56,18 @@ namespace YBlast.Managers
             if (cube == null)
                 return ECubeType.None;
             return cube.Type;
+        }
+
+        public void SetColorsForTesting(Dictionary<Vector2Int, ECubeColor> testDictionary)
+        {
+            foreach (var cellIndex in testDictionary)
+                _grid.CubeColors[cellIndex.Key.x, cellIndex.Key.y] = cellIndex.Value;
+        }
+
+        public void ResetTestedColors(List<Vector2Int> testedCells)
+        {
+            foreach (var cellIndex in testedCells)
+                _grid.CubeColors[cellIndex.x, cellIndex.y] = ECubeColor.None;
         }
     }
 }

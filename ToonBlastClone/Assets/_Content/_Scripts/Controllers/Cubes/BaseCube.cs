@@ -28,7 +28,7 @@ namespace YBlast
            Transform tr= _spriteRenderer.transform;
            tr.DOKill();
            tr.rotation = Quaternion.identity;
-           tr.DOShakeRotation(0.5f, new Vector3(0, 0, 30), 10);
+           tr.DOShakeRotation(0.5f, new Vector3(0, 0, 30), 10,0);
         }
 
         public virtual void OnBlast()
