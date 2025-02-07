@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using ModestTree.Util;
 using UnityEngine;
 using Zenject;
 
@@ -23,19 +25,31 @@ namespace YBlast.Managers
         }
         
 
-        public List<Vector2Int> CalculateSameColorNeighbors(Vector2Int initialCellIndex)
+        public List<Vector2Int> CalculateSameColorNeighbors(Vector2Int initialCellIndex, bool ignorePerformingCubes = false)
         {
             ECubeColor desiredColor = _gridManager.GetCubeColor(initialCellIndex);
-            
+
             List<Vector2Int> blastingCubes = new List<Vector2Int>();
             blastingCubes.Add(initialCellIndex);
+
+            if (ignorePerformingCubes)
+            {
+                if (_gridManager.GetBaseCube(initialCellIndex).IsPerforming)
+                    return blastingCubes;
+            }
             
             CheckAllDirectionOfACell(initialCellIndex);
+            
+            return blastingCubes;
 
             void CheckAllDirectionOfACell(Vector2Int cellIndex)
             {
-                foreach (Vector2Int direction in _directions)
-                    CheckACell(cellIndex + direction);
+                if (ignorePerformingCubes)
+                    foreach (Vector2Int direction in _directions)
+                        CheckACellIgnorePerformingCubes(cellIndex + direction);
+                else
+                    foreach (Vector2Int direction in _directions)
+                        CheckACell(cellIndex + direction);
             }
 
             void CheckACell(Vector2Int cellIndex)
@@ -48,6 +62,19 @@ namespace YBlast.Managers
                 blastingCubes.Add(cellIndex);
                 CheckAllDirectionOfACell(cellIndex);
             }
+            
+            void CheckACellIgnorePerformingCubes(Vector2Int cellIndex)
+            {
+                if(blastingCubes.Contains(cellIndex))
+                    return;
+                if(!IsSameColor(cellIndex))
+                    return;
+                if(_gridManager.GetBaseCube(cellIndex).IsPerforming)
+                    return;
+                
+                blastingCubes.Add(cellIndex);
+                CheckAllDirectionOfACell(cellIndex);
+            }
 
             bool IsSameColor(Vector2Int cellIndex)
             {
@@ -55,8 +82,6 @@ namespace YBlast.Managers
                     return false;
                 return _gridManager.GetCubeColor(cellIndex) == desiredColor;
             }
-            
-            return blastingCubes;
         }
 
         public Dictionary<Vector2Int, List<ECubeColor>> GetDamagedCellsAroundBlastedGroup(List<Vector2Int> blastingCubes)

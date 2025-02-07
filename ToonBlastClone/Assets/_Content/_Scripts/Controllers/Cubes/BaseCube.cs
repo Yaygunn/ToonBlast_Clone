@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -7,15 +8,23 @@ namespace YBlast
     {
         [SerializeField] protected SpriteRenderer _spriteRenderer;
 
-        private const float _gravityMultiply = 0.1f;
+        private const float _gravityMultiply = 0.08f;
         
         public virtual ECubeType Type => ECubeType.None;
 
         public virtual bool IsFallable => true;
         
+        public bool IsPerforming { get; private set; } // if true falling or being blasted
+        
         public Vector2Int CellIndex { get; private set; }
 
         private Sequence _tweenSequence;
+
+        private void OnEnable()
+        {
+            _tweenSequence.Kill();
+            IsPerforming = false;
+        }
 
         public virtual void SetCellIndex(Vector2Int cellIndex)
         {
@@ -38,6 +47,8 @@ namespace YBlast
 
         public virtual void Fall(Vector3 fallDestination)
         {
+            IsPerforming = true;
+            
             float time = Mathf.Sqrt((2 * (fallDestination - transform.position).magnitude) * _gravityMultiply);
             
             _tweenSequence.Kill();
@@ -50,7 +61,7 @@ namespace YBlast
 
         protected virtual void FallenToDestination()
         {
-            
+            IsPerforming = false;
         }
     }
 }

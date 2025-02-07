@@ -70,6 +70,7 @@ namespace YBlast
 
         protected override void FallenToDestination()
         {
+            base.FallenToDestination();
             EventHub.ColorCubeReachedFallDestination(CellIndex);
         }
     }

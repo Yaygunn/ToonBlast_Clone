@@ -56,7 +56,7 @@ namespace YBlast.Managers
         }
         public void Tick()
         {
-            CalculateAndChangeSprites();
+            CalculateAndChangeSprites(true);
         }
 
         public void ResetSpritesOfAllColorCubes()
@@ -87,7 +87,7 @@ namespace YBlast.Managers
             }
         }
 
-        private void CalculateAndChangeSprites()
+        private void CalculateAndChangeSprites(bool ignorePerforming = false)
         {
             _calculatedCells.Clear();
             
@@ -100,7 +100,7 @@ namespace YBlast.Managers
                 if(_calculatedCells.Contains(VARIABLE))
                     continue;
 
-                List<Vector2Int> sameColorNeighbors = _neighborCalculator.CalculateSameColorNeighbors(VARIABLE);
+                List<Vector2Int> sameColorNeighbors = _neighborCalculator.CalculateSameColorNeighbors(VARIABLE, ignorePerforming);
 
                 for (int i = 0; i < sameColorNeighbors.Count; i++)
                     _calculatedCells.Add(sameColorNeighbors[i]);
