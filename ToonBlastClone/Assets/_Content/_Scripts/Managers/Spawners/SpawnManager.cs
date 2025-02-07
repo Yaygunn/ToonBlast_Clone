@@ -59,6 +59,8 @@ namespace YBlast.Managers
                 BaseCube cube = _cubeSpawner.SpawnColorCube(VARIABLE.Value);
                 cube.transform.position = _cellPositionManager.GetSpawnPos(previousColumb, spawnChainOrderInColumb);           
                 fallAction(cube, VARIABLE.Key);
+
+                spawnChainOrderInColumb++;
             }
         }
 
