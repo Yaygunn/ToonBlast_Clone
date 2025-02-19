@@ -145,7 +145,7 @@ namespace YBlast.Editorr
             int buttonHeight = 50;
             int padding = 5;
                 
-            _gridContainer.style.flexDirection = FlexDirection.Row;
+            _gridContainer.style.flexDirection = FlexDirection.Column;
             _gridContainer.style.flexWrap = Wrap.Wrap;
 
             _gridContainer.style.width = buttonWidth * y + (2 * padding) * (y - 0.5f); 
