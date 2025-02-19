@@ -26,6 +26,11 @@ namespace YBlast.Data
             return _cubeColors[GetIndex(cellIndex)];
         }
 
+        public ECubeColor GetCubeColor(int index)
+        {
+            return _cubeColors[index];
+        }
+        
         #endregion
 
         public void SetGridSize(Vector2Int size)
@@ -47,6 +52,12 @@ namespace YBlast.Data
         public void SetColorCube(ECubeColor cubeColor, Vector2Int cellIndex)
         {
             int index = GetIndex(cellIndex);
+            _cubeTypes[index] = ECubeType.ColorCube;
+            _cubeColors[index] = cubeColor;
+        }
+        
+        public void SetColorCube(ECubeColor cubeColor, int index)
+        {
             _cubeTypes[index] = ECubeType.ColorCube;
             _cubeColors[index] = cubeColor;
         }

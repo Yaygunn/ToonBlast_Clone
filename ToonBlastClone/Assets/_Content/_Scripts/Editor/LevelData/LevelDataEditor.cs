@@ -169,12 +169,18 @@ namespace YBlast.Editorr
                 
                 int index = i;
                 button.clicked += () => OnGridButtonClicked(button, index);
+                
+                SetButtonColor(button, _levelData.GridData.GetCubeColor(i));
             }
         }
 
         private void OnGridButtonClicked(Button button, int index)
         {
-            Debug.Log(index);
+            SetButtonColor(button, _selectedCubeColor);
+            _levelData.GridData.SetColorCube(_selectedCubeColor, index);
+            
+            UnityEditor.EditorUtility.SetDirty(_levelData);
+            UnityEditor.AssetDatabase.SaveAssets();
         }
 
         private void SetButtonColor(Button button, ECubeColor cubeColor)
