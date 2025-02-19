@@ -35,6 +35,10 @@ namespace YBlast.Editorr
             _visualTree.CloneTree(_document);
 
             HandleGrid();
+            
+            PropertyField colorPossibilities = _document.Q<PropertyField>("ColorPossibilities");
+            colorPossibilities.RegisterCallback<ChangeEvent<Vector2Int>>((val)=> Debug.Log("value changed"));
+
 
             return _document;
         }
@@ -46,8 +50,8 @@ namespace YBlast.Editorr
             _gridContainer = _document.Q<VisualElement>("GridContainer");
             _colorButtonsContainer = _document.Q<VisualElement>("ColorButtonContainer");
 
-            PropertyField _gridSize = _document.Q<PropertyField>("GridSize");
-            _gridSize.RegisterCallback<ChangeEvent<Vector2Int>>(ResetGrid);
+            PropertyField gridSize = _document.Q<PropertyField>("GridSize");
+            gridSize.RegisterCallback<ChangeEvent<Vector2Int>>(ResetGrid);
             
             UpdateGrid();
             UpdateColorButtons();
@@ -63,6 +67,7 @@ namespace YBlast.Editorr
             _colorButtonsContainer.Clear();
             
             int buttonWidth = 50;
+            int resetButtonWidth = 100;
             int buttonHeight = 50;
             int padding = 5;
 
@@ -71,7 +76,7 @@ namespace YBlast.Editorr
             _colorButtonsContainer.style.flexDirection = FlexDirection.Row;
             _colorButtonsContainer.style.flexWrap = Wrap.Wrap;
 
-            _colorButtonsContainer.style.width = buttonWidth * numberOfButtons + (2 * padding) * (numberOfButtons);
+            _colorButtonsContainer.style.width = resetButtonWidth + buttonWidth * numberOfButtons + (2 * padding) * (numberOfButtons + 1);
             _colorButtonsContainer.style.height = buttonHeight + (2 * padding);
 
             _colorButtonsContainer.style.paddingBottom = padding;
@@ -83,6 +88,8 @@ namespace YBlast.Editorr
 
             foreach (var cubeColor in _levelData.ColorPossibilities.GetAllColors())
                 AddNewButtonWithColor(cubeColor);
+
+            AddResetButton();
 
             void AddNewButtonWithColor(ECubeColor cubeColor)
             {
@@ -98,6 +105,22 @@ namespace YBlast.Editorr
                 button.clicked += () => OnColorButtonClicked(cubeColor);
                 
                 SetButtonColor(button, cubeColor);
+            }
+
+            void AddResetButton()
+            {
+                Button button = new Button();
+                
+                button.style.width = resetButtonWidth;
+                button.style.height = buttonHeight;
+                button.style.marginRight = padding ;
+                button.style.marginBottom = padding ;
+
+                button.text = "Update Colors";
+
+                _colorButtonsContainer.Add(button);
+                
+                button.clicked += UpdateColorButtons;
             }
         }
 
