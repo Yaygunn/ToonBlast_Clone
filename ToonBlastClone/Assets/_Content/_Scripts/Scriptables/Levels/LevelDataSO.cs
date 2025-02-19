@@ -16,8 +16,9 @@ namespace YBlast
         [SerializeField] private GroupRules _groupRules;
 
         [SerializeField] private Goals _goals;
-        
 
+
+        public Vector2Int GridSize => _gridSize;
         public GridCreationData GridData => _gridData;
         public ColorPossibilities ColorPossibilities => _colorPossibilities;
         public GroupRules GroupRules => _groupRules;

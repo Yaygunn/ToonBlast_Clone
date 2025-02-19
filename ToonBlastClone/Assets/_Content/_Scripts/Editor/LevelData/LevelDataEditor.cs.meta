@@ -5,6 +5,7 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - _visualTree: {fileID: 9197481963319205126, guid: 936488e65eea16a4ead080bbe26ca196, type: 3}
+  - _colorCubeSpriteHolderSO: {fileID: 11400000, guid: 8f3414ef1d67cae47b162f57493e2d65, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
