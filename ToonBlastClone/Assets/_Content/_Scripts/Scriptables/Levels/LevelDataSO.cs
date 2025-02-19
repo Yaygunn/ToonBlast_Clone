@@ -23,7 +23,7 @@ namespace YBlast
         public GroupRules GroupRules => _groupRules;
         public Goals Goals => _goals;
 
-        #if UNITY_EDITOR
+        /*#if UNITY_EDITOR
 
         public void RandomlyFillGrid()
         {
@@ -43,9 +43,9 @@ namespace YBlast
             UnityEditor.AssetDatabase.SaveAssets();
         }
         #endif
-
+*/
     }
-    
+    /*
     #if UNITY_EDITOR
     
     [UnityEditor.CustomEditor(typeof(LevelDataSO))]
@@ -66,6 +66,6 @@ namespace YBlast
         }
     }
     
-    #endif
+    #endif*/
 }
 
