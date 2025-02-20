@@ -93,8 +93,6 @@ namespace YBlast.Managers
             
             foreach (var VARIABLE in _cellsToCalculateSprite)
             {
-                if(!_gridManager.IsValidIndex(VARIABLE))
-                    continue;
                 if(_gridManager.GetCubeColor(VARIABLE) == ECubeColor.None)
                     continue;
                 if(_calculatedCells.Contains(VARIABLE))

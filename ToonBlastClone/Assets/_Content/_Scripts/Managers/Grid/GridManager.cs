@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 using YBlast.Data;
+using YBlast.Utilities;
 
 namespace YBlast.Managers
 {
@@ -12,7 +13,7 @@ namespace YBlast.Managers
         [Inject]
         void Construct(GridCreationData creationData)
         {
-            _grid = new GridData(creationData.GridSize);
+            _grid = new GridData(creationData.GridSize.Add(2,2));
         }
 
         public BaseCube GetBaseCube(Vector2Int cellIndex)
@@ -38,11 +39,6 @@ namespace YBlast.Managers
         {
             _grid.Cubes[cellIndex.x, cellIndex.y] = null;
             _grid.CubeColors[cellIndex.x, cellIndex.y] = ECubeColor.None;
-        }
-
-        public bool IsValidIndex(Vector2Int cellIndex)
-        {
-            return cellIndex.x >= 0 && cellIndex.y >= 0 && cellIndex.x < _grid.GridSize.x && cellIndex.y < _grid.GridSize.y;
         }
 
         public Vector2Int GetGridSize()

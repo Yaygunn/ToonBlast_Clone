@@ -21,7 +21,7 @@ namespace YBlast.Managers.CellPosition.Classic
         {
             _spaceBetweenCells = spacingSettings.CellSize + spacingSettings.CellSpacing;
             SetCell00Pos(gridCreationData.GridSize, spacingSettings.CellSize, spacingSettings.CellSpacing);
-            SetCubeSpawnPositions(gridCreationData, spacingSettings.SpawnYOffset);
+            SetCubeSpawnPositions(gridCreationData.GridSize, spacingSettings.SpawnYOffset);
         }
 
         public Vector3 GetCellPos(Vector2Int cellIndex)
@@ -36,6 +36,8 @@ namespace YBlast.Managers.CellPosition.Classic
 
         private void SetCell00Pos(Vector2Int gridSize, float cellSize, float cellSpacing)
         {
+            gridSize = gridSize.Add(2, 2);
+            
             float totalHeight = gridSize.x * cellSize + (gridSize.x - 1) * cellSpacing;
             float totalWidth = gridSize.y * cellSize + (gridSize.y - 1) * cellSpacing;
 
@@ -43,11 +45,13 @@ namespace YBlast.Managers.CellPosition.Classic
             _cell00Pos.y = _centerPos.y + (totalHeight*0.5f) - (cellSize * 0.5f);
         }
 
-        private void SetCubeSpawnPositions(GridCreationData gridCreationData, float spawnYOffset)
+        private void SetCubeSpawnPositions(Vector2Int gridSize, float spawnYOffset)
         {
-            _spawnPositionsByColumb = new Vector3[gridCreationData.GridSize.y];
+            gridSize = gridSize.Add(2, 2);
+            
+            _spawnPositionsByColumb = new Vector3[gridSize.y];
 
-            for (int i = 0; i < gridCreationData.GridSize.y; i++)
+            for (int i = 0; i < gridSize.y; i++)
                 _spawnPositionsByColumb[i] = _cell00Pos.Add( i * _spaceBetweenCells, spawnYOffset);
         }
         

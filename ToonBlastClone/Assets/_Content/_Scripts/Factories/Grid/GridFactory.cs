@@ -46,11 +46,22 @@ namespace YBlast.Factories
 
         private void FillGridAccordingToGridCreationData()
         {
-            VectorUtilities.OperateOnEachIndex(_gridCreationData.GridSize ,FillACell);
+            //VectorUtilities.OperateOnEachIndex(_gridCreationData.GridSize ,FillACell);
+
+            Vector2Int gridSize = _gridCreationData.GridSize.Add(2, 2);
+            Vector2Int cellIndex = Vector2Int.zero;
+
+            for (cellIndex.x = 1; cellIndex.x < gridSize.x -1; cellIndex.x++)
+            {
+                for (cellIndex.y = 1; cellIndex.y < gridSize.y -1; cellIndex.y++)
+                {
+                    FillACell(cellIndex);
+                }
+            }
 
             void FillACell(Vector2Int cellIndex)
             {
-                ColorCube cube = _cubeSpawner.SpawnColorCube(_gridCreationData.GetCubeColor(cellIndex));
+                ColorCube cube = _cubeSpawner.SpawnColorCube(_gridCreationData.GetCubeColor(cellIndex.Add(-1,-1)));
 
                 Transform cubeTransform = cube.transform;
 

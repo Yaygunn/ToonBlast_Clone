@@ -82,8 +82,8 @@ namespace YBlast.Managers
             Vector2Int cellIndex = Vector2Int.zero;
             Vector2Int gridSize = _gridManager.GetGridSize();
             
-            for (cellIndex.x = 0; cellIndex.x < gridSize.x; cellIndex.x++)
-                for (cellIndex.y = 0; cellIndex.y < gridSize.y; cellIndex.y++)
+            for (cellIndex.x = 1; cellIndex.x < gridSize.x -1; cellIndex.x++)
+                for (cellIndex.y = 1; cellIndex.y < gridSize.y -1; cellIndex.y++)
                     if(_neighborCalculator.CalculateSameColorNeighbors(cellIndex).Count>=2)
                         return true;
             return false;

@@ -71,14 +71,14 @@ namespace YBlast.Managers
         
         private void ColumbFall(int columbIndex)
         {
-            int rowIndex = _gridHeight;
+            int rowIndex = _gridHeight -1;
 
             while (true)
             {
                 rowIndex--;
                 
                 rowIndex = FindLowestEmptyCell(columbIndex, rowIndex);
-                if (rowIndex == -1)
+                if (rowIndex == 0)
                     return;
                 
                 int cellAbove = FindLowestFallableCell(columbIndex, rowIndex - 1);
@@ -98,7 +98,7 @@ namespace YBlast.Managers
         {
             Vector2Int cellIndex = new Vector2Int(startRowIndex, columbIndex);
             
-            for (; cellIndex.x>= 0; cellIndex.x--)
+            for (; cellIndex.x> 0; cellIndex.x--)
                 if (_gridManager.GetCubeType(cellIndex) == ECubeType.None)
                     return cellIndex.x;
             return cellIndex.x;
@@ -108,7 +108,7 @@ namespace YBlast.Managers
         {
             Vector2Int cellIndex = new Vector2Int(startRowIndex, columbIndex);
 
-            for (; cellIndex.x >= 0; cellIndex.x--)
+            for (; cellIndex.x > 0; cellIndex.x--)
             {
                 if (_gridManager.GetCubeType(cellIndex) == ECubeType.None)
                     continue;

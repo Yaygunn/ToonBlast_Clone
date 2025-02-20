@@ -78,8 +78,6 @@ namespace YBlast.Managers
 
             bool IsSameColor(Vector2Int cellIndex)
             {
-                if (!_gridManager.IsValidIndex(cellIndex))
-                    return false;
                 return _gridManager.GetCubeColor(cellIndex) == desiredColor;
             }
         }
