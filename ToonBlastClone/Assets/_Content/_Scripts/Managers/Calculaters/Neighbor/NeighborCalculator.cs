@@ -83,33 +83,5 @@ namespace YBlast.Managers
                 return _gridManager.GetCubeColor(cellIndex) == desiredColor;
             }
         }
-
-        public Dictionary<Vector2Int, List<ECubeColor>> GetDamagedCellsAroundBlastedGroup(List<Vector2Int> blastingCubes)
-        {
-            Dictionary<Vector2Int, List<ECubeColor>> damagedCubes = new();
-            
-            CheckAllDirectionOfACell(blastingCubes[0]);
-
-            void CheckAllDirectionOfACell(Vector2Int cellIndex)
-            {
-                foreach (Vector2Int direction in _directions)
-                    CheckACell(cellIndex,cellIndex + direction);
-            }
-
-            void CheckACell(Vector2Int checkingCell, Vector2Int cellBeingChecked)
-            {
-                if(blastingCubes.Contains(cellBeingChecked))
-                    return;
-                if(!_gridManager.IsValidIndex(cellBeingChecked))
-                    return;
-                
-                if(!damagedCubes.ContainsKey(cellBeingChecked))
-                    damagedCubes.Add(cellBeingChecked, new List<ECubeColor>());
-                
-                damagedCubes[cellBeingChecked].Add(_gridManager.GetCubeColor(checkingCell));
-            }
-            
-            return damagedCubes;
-        }
     }
 }
