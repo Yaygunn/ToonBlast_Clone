@@ -131,6 +131,7 @@ namespace YBlast.Editorr
         
         private void ResetGrid(ChangeEvent<Vector2Int> evt)
         {
+            _levelData.GridData.UpdateGridSize(evt.newValue);
             UpdateGrid();
         }
         

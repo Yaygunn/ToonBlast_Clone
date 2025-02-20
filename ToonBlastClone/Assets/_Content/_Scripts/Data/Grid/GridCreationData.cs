@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using YBlast.Utilities;
 
 namespace YBlast.Data
 {
@@ -7,7 +8,7 @@ namespace YBlast.Data
     [Serializable]
     public class GridCreationData
     {
-        [SerializeField] private Vector2Int _gridSize = new Vector2Int(1, 1);
+        [SerializeField, HideInInspector] private Vector2Int _gridSize = new Vector2Int(1, 1);
 
         [SerializeField] private ECubeType[] _cubeTypes;
         [SerializeField] private ECubeColor[] _cubeColors;
@@ -62,9 +63,31 @@ namespace YBlast.Data
             _cubeColors[index] = cubeColor;
         }
 
+        public void UpdateGridSize(Vector2Int newSize)
+        {
+            ECubeColor[] newColors = new ECubeColor[newSize.x * newSize.y];
+
+            for(int i = 0 ; i < newSize.x && i < _gridSize.x ; i++)
+            for (int j = 0; j < newSize.y && j < _gridSize.y; j++)
+                newColors[GetNewGridIndex(i, j)] = _cubeColors[GetIndex(i,j)];
+
+            int GetNewGridIndex(int x, int y)
+            {
+                return x + y * newSize.x;
+            }
+
+            SetGridSize(newSize);
+            _cubeColors = newColors;
+        }
+
         private int GetIndex(Vector2Int cellIndex)
         {
             return cellIndex.x + cellIndex.y * _gridSize.x;
+        }
+        
+        private int GetIndex(int x, int y)
+        {
+            return x + y * _gridSize.x;
         }
     }
 }
