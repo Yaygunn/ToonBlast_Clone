@@ -9,7 +9,9 @@ namespace YBlast.Managers
     public class NeighborCalculator
     {
         private GridManager _gridManager;
-        
+
+        private List<Vector2Int> _sameColorNeighbors = new();
+            
          Vector2Int[] _directions = 
         {
             Vector2Int.right, 
@@ -29,18 +31,19 @@ namespace YBlast.Managers
         {
             ECubeColor desiredColor = _gridManager.GetCubeColor(initialCellIndex);
 
-            List<Vector2Int> blastingCubes = new List<Vector2Int>();
-            blastingCubes.Add(initialCellIndex);
+            _sameColorNeighbors.Clear();
+            
+            _sameColorNeighbors.Add(initialCellIndex);
 
             if (ignorePerformingCubes)
             {
                 if (_gridManager.GetBaseCube(initialCellIndex).IsPerforming)
-                    return blastingCubes;
+                    return _sameColorNeighbors;
             }
             
             CheckAllDirectionOfACell(initialCellIndex);
             
-            return blastingCubes;
+            return _sameColorNeighbors;
 
             void CheckAllDirectionOfACell(Vector2Int cellIndex)
             {
@@ -54,25 +57,25 @@ namespace YBlast.Managers
 
             void CheckACell(Vector2Int cellIndex)
             {
-                if(blastingCubes.Contains(cellIndex))
+                if(_sameColorNeighbors.Contains(cellIndex))
                    return;
                 if(!IsSameColor(cellIndex))
                     return;
                 
-                blastingCubes.Add(cellIndex);
+                _sameColorNeighbors.Add(cellIndex);
                 CheckAllDirectionOfACell(cellIndex);
             }
             
             void CheckACellIgnorePerformingCubes(Vector2Int cellIndex)
             {
-                if(blastingCubes.Contains(cellIndex))
+                if(_sameColorNeighbors.Contains(cellIndex))
                     return;
                 if(!IsSameColor(cellIndex))
                     return;
                 if(_gridManager.GetBaseCube(cellIndex).IsPerforming)
                     return;
                 
-                blastingCubes.Add(cellIndex);
+                _sameColorNeighbors.Add(cellIndex);
                 CheckAllDirectionOfACell(cellIndex);
             }
 
