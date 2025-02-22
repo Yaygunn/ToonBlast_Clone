@@ -16,8 +16,6 @@ namespace YBlast.Installers
 
         [SerializeField] private ColorCubeSpriteHolderSO _colorCubeSpriteHolderSO;
 
-        [SerializeField] private LayerMasksSO _layerMasksSO;
-        
         public override void InstallBindings()
         {
             #region SO Injection
@@ -29,8 +27,6 @@ namespace YBlast.Installers
 
             Container.BindInstance(_colorCubeSpriteHolderSO).AsSingle();
             
-            Container.BindInstance(_layerMasksSO).AsSingle();
-
             #endregion
             
             #region WithInterfaces
