@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace YBlast.Data
 {
@@ -16,7 +17,7 @@ namespace YBlast.Data
     [System.Serializable]
     public struct SGoal
     {
-        public int CubeColorIndex;
+        public ECubeColor DesiredCubeColor;
         public int Amount;
     }
 }

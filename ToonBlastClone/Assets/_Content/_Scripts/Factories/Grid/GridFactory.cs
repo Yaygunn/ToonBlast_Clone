@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
 using DG.Tweening;
-using Unity.Mathematics;
 using UnityEngine;
 using YBlast.Managers;
 using YBlast.Data;
-using YBlast.Managers.CellPosition.Classic;
 using YBlast.Utilities;
 using Zenject;
 
@@ -21,8 +19,6 @@ namespace YBlast.Factories
 
         private CubeSpawner _cubeSpawner;
 
-        private NeighborCalculator _neighborCalculator;
-
         private CubeSpriteManager _cubeSpriteManager;
 
         [Inject]
@@ -33,7 +29,6 @@ namespace YBlast.Factories
             _gridManager = gridManager;
             _cellPositionManager = cellPositionManager;
             _cubeSpawner = cubeSpawner;
-            _neighborCalculator = neighborCalculator;
             _cubeSpriteManager = cubeSpriteManager;
         }
 
@@ -46,8 +41,6 @@ namespace YBlast.Factories
 
         private void FillGridAccordingToGridCreationData()
         {
-            //VectorUtilities.OperateOnEachIndex(_gridCreationData.GridSize ,FillACell);
-
             Vector2Int gridSize = _gridCreationData.GridSize.Add(2, 2);
             Vector2Int cellIndex = Vector2Int.zero;
 
@@ -61,9 +54,8 @@ namespace YBlast.Factories
 
             void FillACell(Vector2Int cellIndex)
             {
-                ECubeColor cubeColor = _gridCreationData.GetCubeColor(cellIndex.Add(-1, -1));
-                
-                ColorCube cube = _cubeSpawner.SpawnColorCube(_cubeSpriteManager.GetColorIndex(cubeColor));
+                int cubeColorIndex = (int)(_gridCreationData.GetCubeColor(cellIndex.Add(-1, -1)));
+                ColorCube cube = _cubeSpawner.SpawnColorCube(cubeColorIndex);
 
                 Transform cubeTransform = cube.transform;
 

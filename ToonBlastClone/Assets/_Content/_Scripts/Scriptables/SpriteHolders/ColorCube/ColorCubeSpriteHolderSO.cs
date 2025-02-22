@@ -13,10 +13,21 @@ namespace YBlast.Scriptables
         [SerializeField] private SCubeColors _red;
         [SerializeField] private SCubeColors _yellow;
 
-        public Sprite[] GetColorSprites(ECubeColor cubeColor)
+        public Sprite[][] GetSpritesArray()
+        {
+            Sprite[][] sprites = new Sprite[6][];
+
+            for (int i = 0; i < 6; i++)
+                sprites[i] = GetColorSprites(i);
+
+            return sprites;
+        }
+        
+        public Sprite[] GetColorSprites(int cubeColorIndex)
         {
             Sprite[] sprites = new Sprite [4];
-            SCubeColors sCubeColors = GetSCubeColors(cubeColor);
+            
+            SCubeColors sCubeColors = GetSCubeColors((ECubeColor)cubeColorIndex);
 
             sprites[0] = sCubeColors.Default;
             sprites[1] = sCubeColors.A;

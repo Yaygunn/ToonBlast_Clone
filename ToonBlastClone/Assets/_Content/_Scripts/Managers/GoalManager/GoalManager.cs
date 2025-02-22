@@ -25,11 +25,11 @@ namespace YBlast.Managers
 
         private void OnColorCubeBlasted(Vector2Int cellIndex, int cubeColorIndex)
         {
-            if (cubeColorIndex != _goal.CubeColorIndex)
+            if ((ECubeColor)cubeColorIndex != _goal.DesiredCubeColor)
                 return;
 
             _goal.Amount--;
-            EventHub.UpdateGoalText(_goal.CubeColorIndex, _goal.Amount);
+            EventHub.UpdateGoalText(cubeColorIndex, _goal.Amount);
             
             if(_goal.Amount == 0)
                 GameWon();

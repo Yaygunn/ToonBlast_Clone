@@ -1,9 +1,9 @@
 namespace YBlast
 {
-	public enum ECubeColor : byte
+	public enum ECubeColor : sbyte
 	{
-		None,
-		Blue,
+		None = -1,
+		Blue = 0,
 		Green,
 		Pink,
 		Purple,

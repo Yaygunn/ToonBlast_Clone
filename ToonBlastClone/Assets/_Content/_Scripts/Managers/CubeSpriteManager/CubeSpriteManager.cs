@@ -13,8 +13,6 @@ namespace YBlast.Managers
     {
         private GroupRules _groupRules;
         
-        private ColorCubeSpriteHolderSO _colorCubeSpriteHolderSO;
-
         private GridManager _gridManager;
 
         private HashSet<Vector2Int> _cellsToCalculateSprite; 
@@ -23,25 +21,19 @@ namespace YBlast.Managers
 
         private NeighborCalculator _neighborCalculator;
 
-        private ColorPossibilities _colorPossibilities;
-        
-        private Dictionary<ECubeColor, int> _colorIndexes;
-
         private Sprite[][] _sprites;
         
         [Inject]
-        void Construct(GroupRules groupRules, ColorCubeSpriteHolderSO colorCubeSpriteHolderSO, GridManager gridManager, NeighborCalculator neighborCalculator, ColorPossibilities colorPossibilities)
+        void Construct(GroupRules groupRules, ColorCubeSpriteHolderSO colorCubeSpriteHolderSO, GridManager gridManager, NeighborCalculator neighborCalculator)
         {
             _groupRules = groupRules;
-            _colorCubeSpriteHolderSO = colorCubeSpriteHolderSO;
             _gridManager = gridManager;
             _neighborCalculator = neighborCalculator;
-            _colorPossibilities = colorPossibilities;
             
             _cellsToCalculateSprite = new(_gridManager.GetGridSize().GetMultiplication());
             _calculatedCells = new(_gridManager.GetGridSize().GetMultiplication());
 
-            SetColorDictionaryAndSpritesArray();
+            _sprites = colorCubeSpriteHolderSO.GetSpritesArray();
 
             #region EventSubscription
 
@@ -77,11 +69,6 @@ namespace YBlast.Managers
             cube.SetSprite(_sprites[cube.ColorIndex][0]);
         }
         
-        public Sprite GetSpriteOfCubeColorIndex(int cubeColorIndax)
-        {
-            return _sprites[cubeColorIndax][0];
-        }
-
         public void SetCorrectSprites(List<Vector2Int> cellIndexes)
         {
             Sprite sprite =
@@ -93,11 +80,6 @@ namespace YBlast.Managers
                 ((ColorCube)_gridManager.GetBaseCube(cellIndex)).SetSprite(sprite);
                 
             }
-        }
-
-        public int GetColorIndex(ECubeColor cubeColor)
-        {
-            return _colorIndexes[cubeColor];
         }
 
         private void CalculateAndChangeSprites(bool ignorePerforming = false)
@@ -131,23 +113,6 @@ namespace YBlast.Managers
         {
             VectorUtilities.OperateForEachDirection(cellIndex, AddSingleCellToCalculation);
             AddSingleCellToCalculation(cellIndex);
-        }
-        
-        private void SetColorDictionaryAndSpritesArray()
-        {
-            List<ECubeColor> colorList = _colorPossibilities.GetAllColors();
-            _colorIndexes = new(colorList.Count);
-
-            for (int i = 0 ; i < colorList.Count ; i++)
-            {
-                _colorIndexes.Add(colorList[i], i);
-            }
-
-            _sprites = new Sprite[colorList.Count][];
-
-            for (int i = 0; i < colorList.Count; i++)
-                _sprites[i] = _colorCubeSpriteHolderSO.GetColorSprites(colorList[i]);
-
         }
     }
 }

@@ -14,15 +14,11 @@ namespace YBlast.UI
         [SerializeField] private TextMeshProUGUI _goalText;
         [SerializeField] private ColorCubeSpriteHolderSO _colorCubeSpriteHolderSO;
 
-        private CubeSpriteManager _cubeSpriteManager;
-
         [Inject]
-        void Constuct(Goals goals, CubeSpriteManager cubeSpriteManager)
+        void Constuct(Goals goals)
         {
-            _cubeSpriteManager = cubeSpriteManager;
-            
             SGoal goal = goals.GetGoal();
-            SetGoalImage(goal.CubeColorIndex);
+            SetGoalImage(goal.DesiredCubeColor);
             SetGoalText(goal.Amount.ToString());
         }
         
@@ -38,13 +34,12 @@ namespace YBlast.UI
 
         private void UpdateGoal(int cubeColorIndex, int amount)
         {
-            SetGoalImage(cubeColorIndex);
             SetGoalText(amount.ToString());
         }
 
-        private void SetGoalImage(int cubeColor)
+        private void SetGoalImage(ECubeColor cubeColor)
         {
-            _goalImage.sprite = _cubeSpriteManager.GetSpriteOfCubeColorIndex(cubeColor);
+            _goalImage.sprite = _colorCubeSpriteHolderSO.GetSprite(cubeColor,ECubeColorVersion.Default);
         }
 
         private void SetGoalText(string text)
