@@ -7,7 +7,7 @@ namespace YBlast
     [CreateAssetMenu(fileName = "SO_Level", menuName = "SO/Level")]
     public class LevelDataSO : ScriptableObject
     {
-        [SerializeField] private Vector2Int _gridSize;
+        [SerializeField] private Vector2Int _gridSize = new Vector2Int();
 
         [SerializeField] private GridCreationData _gridData;
 

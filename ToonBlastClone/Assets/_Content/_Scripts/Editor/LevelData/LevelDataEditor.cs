@@ -69,25 +69,27 @@ namespace YBlast.Editorr
             int buttonWidth = 50;
             int resetButtonWidth = 100;
             int buttonHeight = 50;
-            int padding = 5;
+            int padding = 1;
+            int containerPadding = 3;
 
             int numberOfButtons = _levelData.ColorPossibilities.GetAllColors().Count + 1;
             
             _colorButtonsContainer.style.flexDirection = FlexDirection.Row;
             _colorButtonsContainer.style.flexWrap = Wrap.Wrap;
 
-            _colorButtonsContainer.style.width = resetButtonWidth + buttonWidth * numberOfButtons + (2 * padding) * (numberOfButtons + 1);
-            _colorButtonsContainer.style.height = buttonHeight + (2 * padding);
+            _colorButtonsContainer.style.width =  (buttonWidth + (2 * padding)) * (numberOfButtons) + resetButtonWidth  + 2 * padding + 2 * containerPadding;
+            _colorButtonsContainer.style.height = buttonHeight + (2 * containerPadding);
 
-            _colorButtonsContainer.style.paddingBottom = padding;
-            _colorButtonsContainer.style.paddingRight = padding;
-            _colorButtonsContainer.style.paddingTop = padding;
-            _colorButtonsContainer.style.paddingLeft = padding;
+            _colorButtonsContainer.style.paddingBottom = containerPadding;
+            _colorButtonsContainer.style.paddingRight = containerPadding;
+            _colorButtonsContainer.style.paddingTop = containerPadding;
+            _colorButtonsContainer.style.paddingLeft = containerPadding;
             
             AddNewButtonWithColor(ECubeColor.None);
 
-            foreach (var cubeColor in _levelData.ColorPossibilities.GetAllColors())
-                AddNewButtonWithColor(cubeColor);
+            var colorList = _levelData.ColorPossibilities.GetAllColors();
+            for (int i = 0 ; i < colorList.Count; i++)
+                AddNewButtonWithColor(colorList[i]);
 
             AddResetButton();
 
@@ -98,7 +100,9 @@ namespace YBlast.Editorr
                 button.style.width = buttonWidth;
                 button.style.height = buttonHeight;
                 button.style.marginRight = padding ;
+                button.style.marginLeft = padding ;
                 button.style.marginBottom = padding ;
+                button.style.marginTop = padding ;
 
                 _colorButtonsContainer.Add(button);
                 
@@ -114,7 +118,9 @@ namespace YBlast.Editorr
                 button.style.width = resetButtonWidth;
                 button.style.height = buttonHeight;
                 button.style.marginRight = padding ;
+                button.style.marginLeft = padding ;
                 button.style.marginBottom = padding ;
+                button.style.marginTop = padding ;
 
                 button.text = "Update Colors";
 
@@ -144,18 +150,19 @@ namespace YBlast.Editorr
 
             int buttonWidth = 50;
             int buttonHeight = 50;
-            int padding = 5;
+            int padding = 1;
+            int containerPadding = 2;
                 
             _gridContainer.style.flexDirection = FlexDirection.Column;
             _gridContainer.style.flexWrap = Wrap.Wrap;
 
-            _gridContainer.style.width = buttonWidth * y + (2 * padding) * (y - 0.5f); 
-            _gridContainer.style.height = buttonHeight * x + (2 * padding) * (x- 1.5f);
+            _gridContainer.style.width = (buttonWidth + 2 * padding) * y + 2 * containerPadding; 
+            _gridContainer.style.height = (buttonHeight + 2 * padding) * x + 2 * containerPadding ;
 
-            _gridContainer.style.paddingBottom = padding;
-            _gridContainer.style.paddingRight = padding;
-            _gridContainer.style.paddingTop = padding;
-            _gridContainer.style.paddingLeft = padding;
+            _gridContainer.style.paddingBottom = containerPadding;
+            _gridContainer.style.paddingRight = containerPadding;
+            _gridContainer.style.paddingTop = containerPadding;
+            _gridContainer.style.paddingLeft = containerPadding;
             
             for (int i = 0; i < x * y; i++)
             {
@@ -164,7 +171,9 @@ namespace YBlast.Editorr
                 button.style.width = buttonWidth;
                 button.style.height = buttonHeight;
                 button.style.marginRight = padding ;
+                button.style.marginLeft = padding ;
                 button.style.marginBottom = padding ;
+                button.style.marginTop = padding ;
 
                 _gridContainer.Add(button);
                 

@@ -10,8 +10,8 @@ namespace YBlast.Data
     {
         [SerializeField, HideInInspector] private Vector2Int _gridSize = new Vector2Int(1, 1);
 
-        [SerializeField] private ECubeType[] _cubeTypes;
-        [SerializeField] private ECubeColor[] _cubeColors;
+        [SerializeField] private ECubeType[] _cubeTypes = new ECubeType [0];
+        [SerializeField] private ECubeColor[] _cubeColors = new ECubeColor[0];
 
         #region Getters
 
@@ -66,6 +66,10 @@ namespace YBlast.Data
         public void UpdateGridSize(Vector2Int newSize)
         {
             ECubeColor[] newColors = new ECubeColor[newSize.x * newSize.y];
+            
+            for(int i = 0 ; i < newSize.x ; i++)
+            for (int j = 0; j < newSize.y ; j++)
+                newColors[GetNewGridIndex(i, j)] = ECubeColor.None;
 
             for(int i = 0 ; i < newSize.x && i < _gridSize.x ; i++)
             for (int j = 0; j < newSize.y && j < _gridSize.y; j++)

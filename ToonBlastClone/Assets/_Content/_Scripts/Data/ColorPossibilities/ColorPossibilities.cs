@@ -8,7 +8,7 @@ namespace YBlast.Data
     [Serializable]
     public class ColorPossibilities
     {
-        [SerializeField] private List<ECubeColor> _colorPossibilities;
+        [SerializeField] private List<ECubeColor> _colorPossibilities = new();
         
         public Dictionary<ECubeColor, int> GetColorIndexDictionary()
         {
