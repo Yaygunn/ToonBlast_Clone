@@ -61,7 +61,9 @@ namespace YBlast.Factories
 
             void FillACell(Vector2Int cellIndex)
             {
-                ColorCube cube = _cubeSpawner.SpawnColorCube(_gridCreationData.GetCubeColor(cellIndex.Add(-1,-1)));
+                ECubeColor cubeColor = _gridCreationData.GetCubeColor(cellIndex.Add(-1, -1));
+                
+                ColorCube cube = _cubeSpawner.SpawnColorCube(_cubeSpriteManager.GetColorIndex(cubeColor));
 
                 Transform cubeTransform = cube.transform;
 

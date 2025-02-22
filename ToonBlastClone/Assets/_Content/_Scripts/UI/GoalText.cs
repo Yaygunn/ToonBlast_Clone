@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using YBlast.Data;
+using YBlast.Managers;
 using YBlast.Scriptables;
 using Zenject;
 
@@ -13,11 +14,15 @@ namespace YBlast.UI
         [SerializeField] private TextMeshProUGUI _goalText;
         [SerializeField] private ColorCubeSpriteHolderSO _colorCubeSpriteHolderSO;
 
+        private CubeSpriteManager _cubeSpriteManager;
+
         [Inject]
-        void Constuct(Goals goals)
+        void Constuct(Goals goals, CubeSpriteManager cubeSpriteManager)
         {
+            _cubeSpriteManager = cubeSpriteManager;
+            
             SGoal goal = goals.GetGoal();
-            SetGoalImage(goal.CubeColor);
+            SetGoalImage(goal.CubeColorIndex);
             SetGoalText(goal.Amount.ToString());
         }
         
@@ -31,15 +36,15 @@ namespace YBlast.UI
             EventHub.Ev_UpdateGoalText -= UpdateGoal;
         }
 
-        private void UpdateGoal(ECubeColor cubeColor, int amount)
+        private void UpdateGoal(int cubeColorIndex, int amount)
         {
-            SetGoalImage(cubeColor);
+            SetGoalImage(cubeColorIndex);
             SetGoalText(amount.ToString());
         }
 
-        private void SetGoalImage(ECubeColor cubeColor)
+        private void SetGoalImage(int cubeColor)
         {
-            _goalImage.sprite = _colorCubeSpriteHolderSO.GetSprite(cubeColor, ECubeColorVersion.Default);
+            _goalImage.sprite = _cubeSpriteManager.GetSpriteOfCubeColorIndex(cubeColor);
         }
 
         private void SetGoalText(string text)

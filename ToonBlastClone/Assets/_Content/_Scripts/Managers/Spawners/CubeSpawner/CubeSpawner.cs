@@ -26,12 +26,12 @@ namespace YBlast.Managers
             _objectPool.InitializeQueue( _cubePrefabHolder.ColorCube.gameObject, poolListLength);
         }
         
-        public ColorCube SpawnColorCube(ECubeColor color)
+        public ColorCube SpawnColorCube(int colorIndex)
         {
             ColorCube colorCube = _objectPool.GetObject(_cubePrefabHolder.ColorCube.gameObject)
                 .GetComponent<ColorCube>();
             
-            colorCube.SetColor(color);
+            colorCube.SetColor(colorIndex);
             
             _cubeSpriteManager.SetCorrectSprite(colorCube);
             

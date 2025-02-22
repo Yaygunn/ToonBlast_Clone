@@ -16,7 +16,7 @@ namespace YBlast.Data
     [System.Serializable]
     public struct SGoal
     {
-        public ECubeColor CubeColor;
+        public int CubeColorIndex;
         public int Amount;
     }
 }

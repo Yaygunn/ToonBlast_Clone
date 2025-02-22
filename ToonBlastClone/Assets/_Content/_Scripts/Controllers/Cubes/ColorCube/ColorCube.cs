@@ -10,7 +10,7 @@ namespace YBlast
     {
         public override ECubeType Type => ECubeType.ColorCube;
 
-        private ECubeColor _color;
+        private int _colorIndex;
 
         private ColorCubeBlaster _cubeBlaster;
 
@@ -19,7 +19,7 @@ namespace YBlast
         private Vector2Int _previousCellIndex;
         
         #region Getters
-        public ECubeColor CubeColor => _color;
+        public int ColorIndex => _colorIndex;
         #endregion
 
         [Inject]
@@ -28,9 +28,9 @@ namespace YBlast
             _cubeBlaster = cubeBlaster;
         }
 
-        public void SetColor(ECubeColor cubeColor)
+        public void SetColor(int colorIndex)
         {
-            _color = cubeColor;
+            _colorIndex = colorIndex;
         }
 
         public void SetSprite(Sprite sprite)
@@ -46,7 +46,7 @@ namespace YBlast
 
         public override void OnBlast()
         {
-            EventHub.ColorCubeBlasted(CellIndex,_color);
+            EventHub.ColorCubeBlasted(CellIndex,_colorIndex);
             _returnToPoolCallBack();
         }
 

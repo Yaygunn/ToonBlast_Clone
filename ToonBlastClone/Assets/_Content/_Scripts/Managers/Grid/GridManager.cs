@@ -14,6 +14,11 @@ namespace YBlast.Managers
         void Construct(GridCreationData creationData)
         {
             _grid = new GridData(creationData.GridSize.Add(2,2));
+            
+            // set cube colors to empty
+            for (int i = 0; i < _grid.GridSize.x; i++)
+                for(int j = 0 ; j < _grid.GridSize.y ; j++)
+                    _grid.CubeColors[i,j] = -1;
         }
 
         public BaseCube GetBaseCube(Vector2Int cellIndex)
@@ -21,7 +26,7 @@ namespace YBlast.Managers
             return _grid.Cubes[cellIndex.x, cellIndex.y];
         }
 
-        public ECubeColor GetCubeColor(Vector2Int cellIndex)
+        public int GetCubeColor(Vector2Int cellIndex)
         {
             return _grid.CubeColors[cellIndex.x, cellIndex.y];
         }
@@ -32,13 +37,13 @@ namespace YBlast.Managers
             cube.SetCellIndex(cellIndex);
             
             if (cube.Type == ECubeType.ColorCube)
-                _grid.CubeColors[cellIndex.x, cellIndex.y] = ((ColorCube)cube).CubeColor;
+                _grid.CubeColors[cellIndex.x, cellIndex.y] = ((ColorCube)cube).ColorIndex;
         }
 
         public void RemoveCube(Vector2Int cellIndex)
         {
             _grid.Cubes[cellIndex.x, cellIndex.y] = null;
-            _grid.CubeColors[cellIndex.x, cellIndex.y] = ECubeColor.None;
+            _grid.CubeColors[cellIndex.x, cellIndex.y] = -1;
         }
 
         public Vector2Int GetGridSize()
@@ -54,7 +59,7 @@ namespace YBlast.Managers
             return cube.Type;
         }
 
-        public void SetColorsForTesting(Dictionary<Vector2Int, ECubeColor> testDictionary)
+        public void SetColorsForTesting(Dictionary<Vector2Int, int> testDictionary)
         {
             foreach (var cellIndex in testDictionary)
                 _grid.CubeColors[cellIndex.Key.x, cellIndex.Key.y] = cellIndex.Value;
@@ -63,7 +68,7 @@ namespace YBlast.Managers
         public void ResetTestedColors(List<Vector2Int> testedCells)
         {
             foreach (var cellIndex in testedCells)
-                _grid.CubeColors[cellIndex.x, cellIndex.y] = ECubeColor.None;
+                _grid.CubeColors[cellIndex.x, cellIndex.y] = -1;
         }
     }
 }

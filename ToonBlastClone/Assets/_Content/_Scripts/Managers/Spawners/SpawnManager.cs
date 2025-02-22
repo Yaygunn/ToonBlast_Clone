@@ -21,7 +21,7 @@ namespace YBlast.Managers
 
         private List<Vector2Int> _spawnTargets = new(10);
         
-        private Dictionary<Vector2Int, ECubeColor> _placementDictionary = new(10);
+        private Dictionary<Vector2Int, int> _placementDictionary = new(10);
         
         [Inject]
         void Construct(GridManager gridManager, CubeSpawner cubeSpawner, NeighborCalculator neighborCalculator, ICellPositionManager cellPositionManager, ColorPossibilities colorPossibilities)
@@ -97,9 +97,9 @@ namespace YBlast.Managers
                 _placementDictionary.Add(VARIABLE, GetRandomColorFromPossibleColors());    
         }
 
-        private ECubeColor GetRandomColorFromPossibleColors()
+        private int GetRandomColorFromPossibleColors()
         {
-            return _colorPossibilities.GetRandomColor();
+            return _colorPossibilities.GetRandomColorIndex();
         }
     }
 }

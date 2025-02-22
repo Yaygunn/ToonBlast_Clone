@@ -12,7 +12,39 @@ namespace YBlast.Scriptables
         [SerializeField] private SCubeColors _purple;
         [SerializeField] private SCubeColors _red;
         [SerializeField] private SCubeColors _yellow;
+
+        public Sprite[] GetColorSprites(ECubeColor cubeColor)
+        {
+            Sprite[] sprites = new Sprite [4];
+            SCubeColors sCubeColors = GetSCubeColors(cubeColor);
+
+            sprites[0] = sCubeColors.Default;
+            sprites[1] = sCubeColors.A;
+            sprites[2] = sCubeColors.B;
+            sprites[3] = sCubeColors.C;
+            
+            return sprites;
+        }
         
+        private SCubeColors GetSCubeColors(ECubeColor cubeColor)
+        {
+            switch (cubeColor)
+            {
+                case ECubeColor.Blue:
+                    return _blue;
+                case ECubeColor.Green:
+                    return _green;
+                case ECubeColor.Pink:
+                    return _pink;
+                case ECubeColor.Purple:
+                    return _purple;
+                case ECubeColor.Red:
+                    return _red;
+                case ECubeColor.Yellow:
+                    return _yellow;
+            }
+            return _yellow;
+        }
         public Sprite GetSprite(ECubeColor cubeColor, ECubeColorVersion colorVersion)
         {
             switch (cubeColor)

@@ -19,18 +19,18 @@ namespace YBlast
             Ev_ColorCubeStartFalling?.Invoke(cellIndex);
         }
         
-        public static event Action<Vector2Int, ECubeColor> Ev_ColorCubeBlasted;
+        public static event Action<Vector2Int, int> Ev_ColorCubeBlasted;
 
-        public static void ColorCubeBlasted(Vector2Int cellIndex, ECubeColor cubeColor)
+        public static void ColorCubeBlasted(Vector2Int cellIndex, int cubeColor)
         {
             Ev_ColorCubeBlasted?.Invoke(cellIndex, cubeColor);
         }
 
-        public static event Action<ECubeColor, int> Ev_UpdateGoalText;
+        public static event Action<int, int> Ev_UpdateGoalText;
 
-        public static void UpdateGoalText(ECubeColor cubeColor, int amount)
+        public static void UpdateGoalText(int cubeColorIndex, int amount)
         {
-            Ev_UpdateGoalText?.Invoke(cubeColor, amount);
+            Ev_UpdateGoalText?.Invoke(cubeColorIndex, amount);
         }
 
         public static event Action Ev_GameWon;

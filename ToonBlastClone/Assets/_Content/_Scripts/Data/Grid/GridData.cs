@@ -6,13 +6,13 @@ namespace YBlast.Data
     {
         public Vector2Int GridSize;
         public BaseCube[,] Cubes;
-        public ECubeColor[,] CubeColors;
+        public int[,] CubeColors;
 
         public GridData(Vector2Int gridSize)
         {
             GridSize = gridSize;
             Cubes = new BaseCube[GridSize.x, GridSize.y];
-            CubeColors = new ECubeColor[GridSize.x, GridSize.y];
+            CubeColors = new int[GridSize.x, GridSize.y];
         }
     }
 }

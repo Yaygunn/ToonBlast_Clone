@@ -29,7 +29,7 @@ namespace YBlast.Managers
 
         public List<Vector2Int> CalculateSameColorNeighbors(Vector2Int initialCellIndex, bool ignorePerformingCubes = false)
         {
-            ECubeColor desiredColor = _gridManager.GetCubeColor(initialCellIndex);
+            int desiredColor = _gridManager.GetCubeColor(initialCellIndex);
 
             _sameColorNeighbors.Clear();
             

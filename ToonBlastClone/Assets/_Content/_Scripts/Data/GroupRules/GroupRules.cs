@@ -10,15 +10,15 @@ namespace YBlast.Data
         [SerializeField] private int _groupSizeForB;
         [SerializeField] private int _groupSizeForC;
 
-        public ECubeColorVersion GetColorVersion(int groupSize)
+        public int GetColorVersion(int groupSize)
         {
             if (_groupSizeForC <= groupSize)
-                return ECubeColorVersion.C;
+                return 3;
             if (_groupSizeForB <= groupSize)
-                return ECubeColorVersion.B;
+                return 2;
             if (_groupSizeForA <= groupSize)
-                return ECubeColorVersion.A;
-            return ECubeColorVersion.Default;
+                return 1;
+            return 0;
         }
     }
 }

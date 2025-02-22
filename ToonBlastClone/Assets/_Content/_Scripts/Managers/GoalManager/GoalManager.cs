@@ -23,13 +23,13 @@ namespace YBlast.Managers
             EventHub.Ev_ColorCubeBlasted -= OnColorCubeBlasted;
         }
 
-        private void OnColorCubeBlasted(Vector2Int cellIndex, ECubeColor cubeColor)
+        private void OnColorCubeBlasted(Vector2Int cellIndex, int cubeColorIndex)
         {
-            if (cubeColor != _goal.CubeColor)
+            if (cubeColorIndex != _goal.CubeColorIndex)
                 return;
 
             _goal.Amount--;
-            EventHub.UpdateGoalText(_goal.CubeColor, _goal.Amount);
+            EventHub.UpdateGoalText(_goal.CubeColorIndex, _goal.Amount);
             
             if(_goal.Amount == 0)
                 GameWon();
