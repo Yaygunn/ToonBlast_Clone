@@ -77,7 +77,7 @@ namespace YBlast.Editorr
             _colorButtonsContainer.style.flexDirection = FlexDirection.Row;
             _colorButtonsContainer.style.flexWrap = Wrap.Wrap;
 
-            _colorButtonsContainer.style.width =  (buttonWidth + (2 * padding)) * (numberOfButtons) + resetButtonWidth  + 2 * padding + 2 * containerPadding;
+            _colorButtonsContainer.style.width =  (buttonWidth + (2 * padding)) * (numberOfButtons) + 2 * (resetButtonWidth  + 2 * padding) + 2 * containerPadding;
             _colorButtonsContainer.style.height = buttonHeight + (2 * containerPadding);
 
             _colorButtonsContainer.style.paddingBottom = containerPadding;
@@ -91,6 +91,7 @@ namespace YBlast.Editorr
             for (int i = 0 ; i < colorList.Count; i++)
                 AddNewButtonWithColor(colorList[i]);
 
+            AddRandomFillButton();
             AddResetButton();
 
             void AddNewButtonWithColor(ECubeColor cubeColor)
@@ -128,11 +129,35 @@ namespace YBlast.Editorr
                 
                 button.clicked += UpdateColorButtons;
             }
-        }
 
+            void AddRandomFillButton()
+            {
+                Button button = new Button();
+                
+                button.style.width = resetButtonWidth;
+                button.style.height = buttonHeight;
+                button.style.marginRight = padding ;
+                button.style.marginLeft = padding ;
+                button.style.marginBottom = padding ;
+                button.style.marginTop = padding ;
+
+                button.text = "Random Fill";
+
+                _colorButtonsContainer.Add(button);
+                
+                button.clicked += RandomFillGrid;
+            }
+        }
+        
         private void OnColorButtonClicked(ECubeColor cubeColor)
         {
             _selectedCubeColor = cubeColor;
+        }
+
+        private void RandomFillGrid()
+        {
+            _levelData.RandomlyFillGrid();
+            UpdateGrid();
         }
         
         private void ResetGrid(ChangeEvent<Vector2Int> evt)
@@ -159,6 +184,7 @@ namespace YBlast.Editorr
             _gridContainer.style.width = (buttonWidth + 2 * padding) * y + 2 * containerPadding; 
             _gridContainer.style.height = (buttonHeight + 2 * padding) * x + 2 * containerPadding ;
 
+            _gridContainer.style.marginTop = 20;
             _gridContainer.style.paddingBottom = containerPadding;
             _gridContainer.style.paddingRight = containerPadding;
             _gridContainer.style.paddingTop = containerPadding;

@@ -19,7 +19,11 @@ namespace YBlast.Data
 
             return _colorIndexes;
         }
-        
+
+        public ECubeColor GetRandomColor()
+        {
+            return _colorPossibilities[Random.Range(0, _colorPossibilities.Count)];
+        }
         public int GetRandomColorIndex()
         {
             return Random.Range(0, _colorPossibilities.Count);
