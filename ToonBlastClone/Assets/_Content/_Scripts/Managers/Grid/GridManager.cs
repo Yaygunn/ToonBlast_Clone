@@ -70,5 +70,11 @@ namespace YBlast.Managers
             foreach (var cellIndex in testedCells)
                 _grid.CubeColors[cellIndex.x, cellIndex.y] = -1;
         }
+
+        public bool IsValidIndex(Vector2Int cellIndex)
+        {
+            return cellIndex.x >= 0 && cellIndex.x < _grid.GridSize.x
+                                    && cellIndex.y >= 0 && cellIndex.y < _grid.GridSize.y;
+        }
     }
 }

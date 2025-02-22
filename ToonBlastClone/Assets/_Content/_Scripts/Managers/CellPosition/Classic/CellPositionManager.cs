@@ -34,6 +34,14 @@ namespace YBlast.Managers.CellPosition.Classic
             return _spawnPositionsByColumb[columb].Add(0, cubeChainOrder * _spaceBetweenCells);
         }
 
+        public Vector2Int GetPossibleCellIndex(Vector2 pos)
+        {
+            pos -= (Vector2)_cell00Pos;
+            pos /= _spaceBetweenCells;
+            pos += new Vector2(0.5f, -0.5f);
+            return new Vector2Int(-(int)pos.y, (int)pos.x);
+        }
+
         private void SetCell00Pos(Vector2Int gridSize, float cellSize, float cellSpacing)
         {
             gridSize = gridSize.Add(2, 2);

@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using Zenject;
-using YBlast.Scriptables;
 
 namespace YBlast.Managers
 {
@@ -9,17 +8,20 @@ namespace YBlast.Managers
     {
         private InputListener _inputListener;
 
-        private LayerMask _cubeLayerMask;
+        private GridManager _gridManager;
+
+        private ICellPositionManager _cellPositionManager;
 
         private bool _isGameActive = true;
 
         [Inject]
-        void Construct(InputListener inputListener, LayerMasksSO layerMasksSO)
+        void Construct(InputListener inputListener, GridManager gridManager, ICellPositionManager cellPositionManager)
         {
             _inputListener = inputListener;
+            _gridManager = gridManager;
+            _cellPositionManager = cellPositionManager;
+            
             _inputListener.OnPressed += OnPressed;
-
-            _cubeLayerMask = layerMasksSO.CubeLayerMask;
 
             EventHub.Ev_GameWon += OnGameWon;
         }
@@ -37,24 +39,12 @@ namespace YBlast.Managers
             if(!_isGameActive)
                 return;
             
-            BaseCube cubeUnderMouse = GetCubeUnderMouse(pressPosition);
-            
-            cubeUnderMouse?.OnClick();
+            Vector2Int cellIndex = _cellPositionManager.GetPossibleCellIndex(pressPosition);
+
+            if (_gridManager.IsValidIndex(cellIndex))
+                _gridManager.GetBaseCube(cellIndex)?.OnClick();
         }
 
-        private BaseCube GetCubeUnderMouse(Vector2 pressPosition)
-        {
-            Collider2D[] colliders = Physics2D.OverlapPointAll(pressPosition, _cubeLayerMask);
-
-            foreach (var VARIABLE in colliders)
-            {
-                BaseCube cube = VARIABLE.GetComponent<BaseCube>();
-                if (cube != null)
-                    return cube;
-            }
-            return null;
-        }
-        
         private void OnGameWon()
         {
             _isGameActive = false;
